@@ -1,0 +1,139 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+/*
+html {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+*/
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body {
+   font-family: "bitter, Helvetica Neue,Helvetica,Arial,sans-serif";
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+/*
+body {
+	overflow: hidden;
+}
+*/
+
+.footer ul {
+	width: 100%;
+}
+.footer #country-name {
+	padding: 10px 20px 10px;
+	font-size: 20px;
+	font-weight: 200;
+	color: #777;
+	text-shadow: 0 1px 0 #fff;
+	text-align: center;
+	width: 100%;
+}
+.dg.ac {
+	z-index:100;
+	top:95px !important;
+}
+
+.navbar-bigone {
+/*   min-height: 100px; */
+}
+
+.navbar-align-bottom{
+   bottom:0;
+   vertical-align: bottom;
+}
+.subnav {
+    border-radius: 0;
+    font-family: bitter;
+    font-size: 12pt;
+    font-weight: bold;
+    /*min-height: 30px;
+    margin-top: 40px;*/
+    line-height:1.1;
+}
+
+.subnav ul {
+   margin: 0;
+   padding: 0;
+   list-style-type: none;
+}
+
+.subnav ul li {
+   display: inline;
+}
+
+.subnav > li > a {
+   padding: 0 20px;
+   color: #ffffff;
+   text-decoration: none;
+}
+
+.subnav > li > a:focus, .subnav > li > a:hover {
+   color: #dce45c;
+}
+
+.buttagiu {
+   height: 80px;
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media (min-device-width: 768px) and (max-device-width: 979px){
+
+  .navbar-inverse {
+    display: none;
+  }
+
+  .subnav > li > a {
+    padding: 0 10px !important;
+  }
+}
+
+@media (max-device-width: 767px){
+  .subnav {
+    display: none;
+  }
+  .subnav > li > a {
+    padding: 0 6px !important;
+  }
+}
+
+@media (max-device-width: 480px){
+  .subnav {
+    display: none;
+  }
+
+  .subnav > li > a {
+    padding: 0 !important;
+  }
+}
