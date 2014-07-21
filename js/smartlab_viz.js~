@@ -126,7 +126,6 @@ function draw3DStat(geoData,statData) {
 			geojson = data;
 			console.log("geojson: "+geojson);
 			//initScene();
-			initGUI();
 			addGeoObject();
 			renderer.render( scene, camera );
 			animate();
@@ -522,7 +521,7 @@ function initScene() {
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 	// GUI
-	//initGUI();
+	initGUI();
 
 	// DAT.GUI
 	//initDATGUI();

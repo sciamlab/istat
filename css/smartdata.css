@@ -1,12 +1,5 @@
 /* Sticky footer styles
 -------------------------------------------------- */
-/*
-html {
-  position: relative;
-  min-height: 100%;
-  overflow: hidden;
-}
-*/
 
 #footer {
   position: absolute;
@@ -15,23 +8,13 @@ html {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
+  border-top: 1px solid #e7e7e7;
 }
 
 
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-
-body {
-   font-family: "bitter, Helvetica Neue,Helvetica,Arial,sans-serif";
-}
-
-body > .container {
-  padding: 60px 15px 0;
-}
-.container .text-muted {
-  margin: 20px 0;
-}
 
 #footer > .container {
   padding-right: 15px;
@@ -41,12 +24,6 @@ body > .container {
 code {
   font-size: 80%;
 }
-
-/*
-body {
-	overflow: hidden;
-}
-*/
 
 .footer ul {
 	width: 100%;
@@ -65,75 +42,30 @@ body {
 	top:95px !important;
 }
 
-.navbar-bigone {
-/*   min-height: 100px; */
+.fenced {
+   background-image:url('../img/fili130.jpg');
 }
 
-.navbar-align-bottom{
-   bottom:0;
-   vertical-align: bottom;
-}
-.subnav {
-    border-radius: 0;
-    font-family: bitter;
-    font-size: 12pt;
-    font-weight: bold;
-    /*min-height: 30px;
-    margin-top: 40px;*/
-    line-height:1.1;
+.force130 {
+  height: 130px !importan;
 }
 
-.subnav ul {
-   margin: 0;
-   padding: 0;
-   list-style-type: none;
+.navbar-selector {
+    float: left;
+    line-height: 20px;
+    padding-left: 15px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+   
 }
-
-.subnav ul li {
-   display: inline;
-}
-
-.subnav > li > a {
-   padding: 0 20px;
-   color: #ffffff;
-   text-decoration: none;
-}
-
-.subnav > li > a:focus, .subnav > li > a:hover {
-   color: #dce45c;
-}
-
-.buttagiu {
-   height: 80px;
-}
-
 /* #### Tablets Portrait or Landscape #### */
 @media (min-device-width: 768px) and (max-device-width: 979px){
 
-  .navbar-inverse {
-    display: none;
-  }
-
-  .subnav > li > a {
-    padding: 0 10px !important;
-  }
 }
-
 @media (max-device-width: 767px){
-  .subnav {
-    display: none;
-  }
-  .subnav > li > a {
-    padding: 0 6px !important;
-  }
+
 }
 
 @media (max-device-width: 480px){
-  .subnav {
-    display: none;
-  }
-
-  .subnav > li > a {
-    padding: 0 !important;
-  }
 }

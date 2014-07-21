@@ -1,0 +1,20 @@
+html { 
+  background:url('/contest-istat/img/home.jpg') no-repeat center center fixed;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  height: 100%;
+  width: 100%;
+}
+
+html.province { 
+  background:url('/contest-istat/img/province.jpg') no-repeat center center fixed;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  height: 100%;
+  width: 100%;
+}
+
