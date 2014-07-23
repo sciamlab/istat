@@ -114,7 +114,7 @@ jQuery.getJSON(dataset_file, function(data, textStatus, jqXHR) {
 
 
     // get the data
-    jQuery.getJSON('italy_province_lowres.json', function(data, textStatus, jqXHR) {
+    jQuery.getJSON('province_500_3.json', function(data, textStatus, jqXHR) {
 
         geojson = data;
         console.log("geojson: "+geojson);

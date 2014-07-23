@@ -438,9 +438,11 @@ function initGUI() {
 
 		} 
 		if(this.INTERSECTED) {
-			$('#footer-text').html('<b>'+this.hover_name+'</b> - '+this.height_label+': '+this.hover_height+this.height_unit+' '+this.color_label+': '+this.hover_color+this.color_unit);
+			//$('#dhtmltooltip').html('<b>'+this.hover_name+'</b> - '+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit);
+                        ddrivetip('<p><b>'+this.hover_name+'</b> - '+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'</p>','rgba(220,228,92,0.6)', 300);
 		} else {
-			$('#footer-text').html("");
+			hideddrivetip();
+                        //$('#dhtmltooltip').html("");
 		}
 		onFrame(tick);
 	}
