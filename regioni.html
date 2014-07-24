@@ -8,7 +8,7 @@
     <meta name="author" content="Alessio Dragoni (ad@sciamlab.com)">
     <link rel="shortcut icon" href="img/favicon.ico">
 
-    <title>SciamLab SmartData - ISTAT Censimento Imprese 2011</title>
+    <title>Il Dato &egrave; tratto! Confronto indicatori del Censimento Imprese ISTAT 2011</title>
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -44,37 +44,50 @@
   </head>
 
   <body>
+    <!-- legend tooltip on WebGL elements -->
     <div id="dhtmltooltip"></div>
-    <!-- Fixed navbar -->
+
+    <!-- start infoarea -->
+    <div id="infoarea" style="position:absolute; top: 140px;left: 20px; width: 397; height: 400px;z-index:100;">
+      <div id="legend" >
+         <img src="img/legend1.png" class="img-thumbnail" style="max-width:240px; height: auto;">
+      </div>
+    </div>
+    <!-- end infoarea -->
+
+    <!-- start navbar -->
     <div class="navbar navbar-default navbar-fixed-top fenced force130" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
+<!--      <div class="container"> -->
+        <div class="navbar-header" style="position:relative; left: 5px;">
           <div class="row">
-          <div class="col-md-12">
-          <a class="navbar-brand" href="http://beta.sciamlab.com" title="SciamLab Home Page" style="box-sizing: content-box;">
+            <div class="col-md-12">
+              <a class="navbar-brand" href="index.html" title="SciamLab Home Page" style="box-sizing: content-box;">
 	          <img style="max-height:60px;width: auto; vertical-align: middle;" src="img/best_worst.png">
-          </a>
-          </div>
+              </a>
+            </div>
           </div>
           <div class="row">
-          <div class="col-md-12">
-          <div class="navbar-brand navbar-selector">
-          <select id="statchooser" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat()">
-            <option value='abitanti_assunzioni.json'>Popolazione / Propensione Assunzione</option>
-            <option value='abitanti_distretti.json'>Popolazione / Nr. Distretti Industriali</option>
-            <option value='abitanti_quoterosa.json'>Popolazione / Quote rosa</option>
-          </select>
-          </div>
-          </div>
+            <div class="col-md-12">
+              <div class="navbar-brand navbar-selector">
+                <select id="statchooser" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat()">
+                  <option value='abitanti_assunzioni.json'>Popolazione / Propensione Assunzione</option>
+                  <option value='abitanti_distretti.json'>Popolazione / Nr. Distretti Industriali</option>
+                  <option value='abitanti_quoterosa.json'>Popolazione / Quote rosa</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
-      </div> <!-- END CONTAINER -->
+<!--      </div> -->
+    </div>
+    <!-- end navbar-->
 
-    </div> <!-- main navbar-->
-    <!-- Begin page content -->
+    <!-- start WebGL content -->
     <div id="3dcontainer" class="container2" style="margin-top:130px">
     </div>
+    <!-- end WebGL content -->
 
+    <!-- start footer -->
     <footer class="footer">
     <div id="footer" class="fenced">
       <div class="container-fluid">
@@ -89,14 +102,14 @@
       </div>
     </div>
     </footer>
-
+    <!-- end footer -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="js/Detector.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/three.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/OrbitControls.js"></script>
     <script type="text/javascript" src="js/d3-threeD.js"></script>
     <script type="text/javascript" src="js/threex.keyboardstate.js"></script>
@@ -113,78 +126,7 @@
            draw3DStat("italy_regions_lowres.json",statFile);
         }
     </script>
-<script type="text/javascript">
-
-/***********************************************
-* Cool DHTML tooltip script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
-* This notice MUST stay intact for legal use
-* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
-***********************************************/
-
-var offsetxpoint=-60; //Customize x offset of tooltip
-var offsetypoint=20; //Customize y offset of tooltip
-var ie=document.all;
-var ns6=document.getElementById && !document.all;
-var enabletip=false;
-if (ie||ns6)
-  var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : "";
-
-function ietruebody(){
-  return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body;
-}
-
-function ddrivetip(thetext, thecolor, thewidth){
-  if (ns6||ie){
-    if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px";
-    if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor;
-    tipobj.innerHTML=thetext;
-    enabletip=true;
-    return false;
-  }
-}
-
-function positiontip(e){
-  if (enabletip){
-    var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
-    var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
-    //Find out how close the mouse is to the corner of the window
-    var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20;
-    var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20;
-
-    var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000;
-
-    //if the horizontal distance isn't enough to accomodate the width of the context menu
-    if (rightedge<tipobj.offsetWidth)
-      //move the horizontal position of the menu to the left by it's width
-      tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px";
-    else if (curX<leftedge)
-      tipobj.style.left="5px";
-    else
-      //position the horizontal position of the menu where the mouse is positioned
-      tipobj.style.left=curX+offsetxpoint+"px";
-
-    //same concept with the vertical position
-    if (bottomedge<tipobj.offsetHeight)
-      tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px";
-    else
-      tipobj.style.top=curY+offsetypoint+"px";
-    tipobj.style.visibility="visible";
-   }
-   console.log("tip enabled: " + enabletip);
-}
-
-function hideddrivetip(){
-enabletip=false;
-tipobj.style.visibility="hidden";
-tipobj.style.left="-1000px";
-tipobj.style.backgroundColor='';
-tipobj.style.width='';
-tipobj.style.border='';
-}
-
-document.onmousemove=positiontip;
-
-</script>
+    <script type="text/javascript" src="js/popup.js"></script>
 
   </body>
 </html>
