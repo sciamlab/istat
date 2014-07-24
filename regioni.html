@@ -119,11 +119,11 @@
     <script type="text/javascript" src="js/smartlab_viz.js"></script>
     <script type="text/javascript">
         initScene();
-        draw3DStat("italy_regions_lowres.json","");
+        draw3DStat("geo/italy_regions_lowres.json","");
         function chooseStat() {
           var selStat = document.getElementById("statchooser");
           var statFile = selStat.options[selStat.selectedIndex].value;
-           draw3DStat("italy_regions_lowres.json",statFile);
+           draw3DStat("geo/italy_regions_lowres.json",statFile);
         }
     </script>
     <script type="text/javascript" src="js/popup.js"></script>

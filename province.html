@@ -106,11 +106,11 @@
     <script type="text/javascript" src="js/smartlab_vizpp.js"></script>
     <script type="text/javascript">
         initScene();
-        draw3DStat("province_500mt_3dec.json.geojson","");
+        draw3DStat("geo/province_500mt_3dec.json","");
         function chooseStat() {
           var selStat = document.getElementById("statchooser");
           var statFile = selStat.options[selStat.selectedIndex].value;
-           draw3DStat("province_500mt_3dec.json.geojson",statFile);
+           draw3DStat("geo/province_500mt_3dec.json",statFile);
         }
     </script>
 <script type="text/javascript">
