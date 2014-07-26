@@ -91,9 +91,12 @@ var description;
 function draw3DStat(geoData,statData) {
 	var dataset_file = statData;
 	var geo_file = geoData;
+        
+	if (dataset_file == '') dataset_file='data/abitanti_assunzioni.json';
+	if (geo_file == '') geo_file='geo/italy_regions_lowres.json';
 
-	if (dataset_file == '') dataset_file='abitanti_assunzioni.json';
-	if (geo_file == '') geo_file='italy_regions_lowres.json';
+        console.log("GEO: "+geo_file);
+        console.log("DATA: "+dataset_file);
 
 	jQuery.getJSON(dataset_file, function(data, textStatus, jqXHR) {
 		dataset = data;
@@ -125,7 +128,7 @@ function draw3DStat(geoData,statData) {
 
 			geojson = data;
 			console.log("geojson: "+geojson);
-			//initScene();
+			initScene();
 			initGUI();
 			addGeoObject();
 			renderer.render( scene, camera );
@@ -163,7 +166,7 @@ function draw3DStat(geoData,statData) {
 							break;
 						}
 					}
-					//console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height);
+					console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height);
 					var mesh = transformSVGPathExposed(feature);
 					// add to array
 					meshes.push(mesh);
@@ -184,7 +187,9 @@ function draw3DStat(geoData,statData) {
 
 				//console.log(" averageValues: " + averageValues);
 				//console.log(" totalValues: " + totalValues);
-
+                console.log(averageValues);
+                console.log(minValueAverage);
+                console.log(maxValueAverage);
 				// we've got our paths now extrude them to a height and add a color
 				for (var i = 0 ; i < averageValues.length ; i++) {
 
@@ -192,7 +197,8 @@ function draw3DStat(geoData,statData) {
 					var scale = ((averageValues[i] - minValueAverage) / (maxValueAverage - minValueAverage)) * 255;
 					//console.log("###SCALE:" + scale);
 
-					var mathColor = gradient5(averageValues[i]); // gradient(Math.round(scale),50);
+					var mathColor = jsgradient.generateGradient('#F02B07','#0476F0',averageValues[i],minValueAverage,maxValueAverage); // gradient5(averageValues[i]);gradient5(averageValues[i]); // gradient(Math.round(scale),50);
+
 					var material = new THREE.MeshLambertMaterial({
 						color: mathColor,
 						//ambient: mathColor,
@@ -200,14 +206,15 @@ function draw3DStat(geoData,statData) {
 					});
 
 					// create extrude based on total
-					var extrude = (((totalValues[i] - minValueTotal) / (maxValueTotal - minValueTotal)) * 100 )+15;
+					var extrude = (((totalValues[i] - minValueTotal) / (maxValueTotal - minValueTotal)) * 100 )+50;
 //					OLD ONE		  var shape3d = meshes[i].extrude({amount: Math.round(extrude), bevelEnabled: false});
 
 					var mes = meshes[i];
 					//console.log("## MESH: "+mes.toSource());
 					//console.log("## MESH: "+typeof mes);
 					var vec1 = new THREE.Vector3( 100, extrude,-100);
-					var vec2 = new THREE.Vector3( 100, 0,-100);
+					var vec2 = new THREE.Vector3( 100, 30,-100);
+
 
 					var randomPoints = [];
 					randomPoints.push(vec1); randomPoints.push(vec2);
@@ -216,11 +223,12 @@ function draw3DStat(geoData,statData) {
 
 					var shape3d = mes.extrude({amount: Math.round(extrude), bevelEnabled: true, bevelThickness  : 20, bevelSize: 10, bevelSegments: 10, extrudePath: randomSpline});
 
-
+					shape3d.castShadow = true;
 					//console.log('['+i+'] - SCALE: '+scale+' MATHCOLOR:'+mathColor+' EXTRUDE: '+Math.round(extrude));
 
 					// create a mesh based on material and extruded shape
 					var toAdd = new THREE.Mesh(shape3d, material);
+					toAdd.castShadow = true;
 					toAdd.name = geojson.features[i].properties.id_regione;
 					// rotate and position the elements nicely in the center
 					//toAdd.rotation.x = Math.PI/2;
@@ -237,9 +245,10 @@ function draw3DStat(geoData,statData) {
 					// add to scene
 					//scene.add(toAdd);
 					//camera.lookAt(shape3d)
-					regions.add(toAdd);
+                                        console.log ("--> Adding regione: "+toAdd.name);
+ 					regions.add(toAdd);
 				}
-
+				regions.castShadow = true;
 				scene.add(regions);
 			}
 
@@ -255,6 +264,7 @@ function draw3DStat(geoData,statData) {
 				var rgb = b | (g << 8) | (r << 16);
 				return rgb;
 			}
+
 
 			function gradient5(val) {
 				col='';
@@ -342,6 +352,13 @@ function draw3DStat(geoData,statData) {
 
 
 		});
+
+        //var obj, i;
+        for ( i = 0; i< scene.children.length ; i++ ) {
+          obj = scene.children[ i ];
+             console.log("### GOING TO REMOVE: [id:" + obj.id+"],[name:"+obj.name+"]");
+        }
+
 	});
 }
 
@@ -470,13 +487,16 @@ function initScene() {
 	renderer = new THREE.WebGLRenderer({antialias:true, logarithmicDepthBuffer: 0.0006});   
 	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT,NEAR, FAR);
 	scene = new THREE.Scene();
-
+        scene.name = "scene_main";
+        renderer.shadowMapEnabled = true;
+        renderer.shadowMapSoft = true;
 	// create axis
 	//axes = buildAxes( 5000 );
 	//scene.add(axes);
 
 	// add and position the camera at a fixed position
-	scene.add(camera);
+	camera.name = "camera_main";
+        scene.add(camera);
 	camera.position.x = 800;
 	camera.position.y = 1700;
 	camera.position.z = 0;
@@ -486,27 +506,60 @@ function initScene() {
 	renderer.setSize(WIDTH, HEIGHT);
 	renderer.setClearColor( 0xffffff); //white: 0xffffff
 
+
 	// add the render target to the page
 	renderer.domElement.id="canvas3d";
-	$("#3dcontainer").append(renderer.domElement);
+	$("#3dcontainer").html(renderer.domElement);
 
 
 	var strDataURI = renderer.domElement.toDataURL();
 
 	// add a light at a specific position
-	var pointLight = new THREE.PointLight(0xFFFFFF);
+	/*var pointLight = new THREE.PointLight(0xFFFFFF ,0);
+    pointLight.castShadow = true;
+    pointLight.shadowDarkness = 0.5;
+    pointLight.shadowCameraVisible = true; // only for debugging
 	scene.add(pointLight);
-	pointLight.position.x = 5000;
-	pointLight.position.y = 5000;
-	pointLight.position.z = 5000;
+	pointLight.position.x = 800;
+	pointLight.position.y = 1700;
+	pointLight.position.z = 800;*/
 
-	// add a base TRANSPARENT plane on which we'll render our map
+    // add a base TRANSPARENT plane on which we'll render our map for shadow
 	/// backgroup grids 
-	//var plane = new THREE.Mesh(
-	//	new THREE.PlaneGeometry(10000, 10000, 10, 10), 
-	//	new THREE.MeshBasicMaterial({ color: 0x7f7f7f, wireframe: true }));
-	//plane.rotation.x = -Math.PI/2;
-	//scene.add( plane );
+	var plane = new THREE.Mesh(
+		new THREE.PlaneGeometry(10000, 10000, 10, 10),
+		new THREE.MeshBasicMaterial({ color: 0xffffff }));
+	plane.rotation.x = -Math.PI/2;
+        plane.receiveShadow = true;
+        plane.name="plane_shadow";
+	scene.add( plane );
+
+
+    // LIGHTS
+
+
+    var light;
+
+    light = new THREE.DirectionalLight(0xffffff);
+    light.position.set(-200, 1000, -300);
+
+    light.castShadow = true;
+   /* light.shadowCameraVisible = true;*/
+
+    light.shadowMapWidth = 2000;
+    light.shadowMapHeight =2000;
+
+    var d = 1000;
+
+    light.shadowCameraLeft = -d;
+    light.shadowCameraRight = d;
+    light.shadowCameraTop = d;
+    light.shadowCameraBottom = -d;
+
+    light.shadowCameraFar = 2000;
+    light.shadowDarkness = 0.4;
+    light.name = "light_shadow";
+    scene.add(light);
 
 	//var planeGeo = new THREE.PlaneGeometry(20000, 20000, 10, 10);
 	//var planeMat = new THREE.MeshLambertMaterial({color: 0xffffff}); //0xffffff
@@ -520,6 +573,7 @@ function initScene() {
 
 	// automated mouse OrbitControls
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.maxPolarAngle=(Math.PI/2)-0.09;
 
 	// GUI
 	//initGUI();
@@ -530,3 +584,5 @@ function initScene() {
 	// manage window resize
 	window.addEventListener( 'resize', onWindowResize, false );
 }
+
+

@@ -1,0 +1,134 @@
+{
+    "title":"Tasso Tumori e Propensione assunzione",
+    "description":"Visualizza il tasso di mortalit&agrave; per tumori e la propensione ad assumere da parte delle regioni",
+    "color_prop":"PropensioneAssumere",
+    "color_label":"Propensione ad assumere",
+    "color_unit":"%",
+    "color_scaling_factor": 10,
+    "height_prop":"TassoTumori",
+    "height_label":"Tasso Mortalit&agrave; Tumori",
+    "height_unit":"",
+    "height_scaling_factor": 1,
+    "data":[
+        {
+            "id_regione": "13",
+            "nome_regione": "Abruzzo",
+            "PropensioneAssumere": 25.2,
+            "TassoTumori": 273.182
+        },
+        {
+            "id_regione": "17",
+            "nome_regione": "Basilicata",
+            "PropensioneAssumere": 25.2,
+            "TassoTumori": 253.888
+      },
+        {
+        "id_regione": "18",
+        "nome_regione": "Calabria",
+            "PropensioneAssumere": 27.5,
+        "TassoTumori": 230.137
+      },
+        {
+        "id_regione": "15",
+        "nome_regione": "Campania",
+        "PropensioneAssumere": 27.5,
+        "TassoTumori": 246.567
+      },
+        {
+        "id_regione": "08",
+        "nome_regione": "Emilia-Romagna",
+        "PropensioneAssumere": 29.5,
+        "TassoTumori": 326.751
+      },
+        {
+        "id_regione": "06",
+        "nome_regione": "Friuli-Venezia Giulia",
+        "PropensioneAssumere": 29.5,
+        "TassoTumori": 360.696
+      },
+        {
+        "id_regione": "12",
+        "nome_regione": "Lazio",
+        "PropensioneAssumere": 29.4,
+        "TassoTumori": 291.717
+      },
+        {
+        "id_regione": "07",
+        "nome_regione": "Liguria",
+        "PropensioneAssumere": 25.2,
+        "TassoTumori": 392.07
+      },
+        {
+        "id_regione": "03",
+        "nome_regione": "Lombardia",
+        "PropensioneAssumere": 29.4,
+        "TassoTumori": 306.138
+      },
+        {
+        "id_regione": "11",
+        "nome_regione": "Marche",
+        "PropensioneAssumere": 29.4,
+        "TassoTumori": 298.195
+      },
+        {
+        "id_regione": "14",
+        "nome_regione": "Molise",
+        "PropensioneAssumere": 27.5,
+        "TassoTumori": 283.13
+      },
+        {
+        "id_regione": "01",
+        "nome_regione": "Piemonte",
+        "PropensioneAssumere": 27.5,
+        "TassoTumori": 335.315
+      },
+        {
+        "id_regione": "16",
+        "nome_regione": "Puglia",
+        "PropensioneAssumere": 27.5,
+        "TassoTumori": 253.226
+      },
+        {
+        "id_regione": "20",
+        "nome_regione": "Sardegna",
+        "PropensioneAssumere": 25.2,
+        "TassoTumori": 284.554
+      },
+        {
+        "id_regione": "19",
+        "nome_regione": "Sicilia",
+        "PropensioneAssumere": 25.2,
+        "TassoTumori": 251.459
+      },
+        {
+        "id_regione": "09",
+        "nome_regione": "Toscana",
+        "PropensioneAssumere": 29.4,
+        "TassoTumori": 324.256
+      },
+        {
+        "id_regione": "04",
+        "nome_regione": "Trentino-Alto Adige",
+        "PropensioneAssumere": 29.5,
+        "TassoTumori": 258.19
+      },
+        {
+        "id_regione": "10",
+        "nome_regione": "Umbria",
+        "PropensioneAssumere": 25.2,
+        "TassoTumori": 301.168
+      },
+        {
+        "id_regione": "02",
+        "nome_regione": "Valle D'Aosta",
+        "PropensioneAssumere": 29.4,
+        "TassoTumori": 328.036
+      },
+        {
+        "id_regione": "05",
+        "nome_regione": "Veneto",
+        "PropensioneAssumere": 29.5,
+        "TassoTumori": 290.394
+      }
+    ]
+}

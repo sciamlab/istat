@@ -49,8 +49,8 @@
 
     <!-- start infoarea -->
     <div id="infoarea" style="position:absolute; top: 140px;left: 20px; width: 397; height: 400px;z-index:100;">
-      <div id="legend" >
-         <img src="img/legend1.png" class="img-thumbnail" style="max-width:240px; height: auto;">
+      <div id="legend" class="img-thumbnail">
+         <img src="img/legend1.png" style="max-width:220px; height: auto;">
       </div>
     </div>
     <!-- end infoarea -->
@@ -70,9 +70,9 @@
             <div class="col-md-12">
               <div class="navbar-brand navbar-selector">
                 <select id="statchooser" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat()">
-                  <option value='abitanti_assunzioni.json'>Popolazione / Propensione Assunzione</option>
-                  <option value='abitanti_distretti.json'>Popolazione / Nr. Distretti Industriali</option>
-                  <option value='abitanti_quoterosa.json'>Popolazione / Quote rosa</option>
+                  <option value='data/abitanti_assunzioni.json'>Popolazione / Propensione Assunzione</option>
+                  <option value='data/abitanti_tumori.json'>Popolazione / Tasso mortalit&agrave; tumori</option>
+                  <option value='data/tumori_assunzioni.json'>Tasso mortalit&agrave; tumori / Propensione Assunzione</option>
                 </select>
               </div>
             </div>
@@ -116,9 +116,10 @@
     <script type="text/javascript" src="js/dat.gui.min.js"></script>
     <script type="text/javascript" src="js/canvas2image.js"></script>
     <script type="text/javascript" src="js/base64.js"></script>
+    <script type="text/javascript" src="js/gradient.js"></script>
     <script type="text/javascript" src="js/smartlab_viz.js"></script>
     <script type="text/javascript">
-        initScene();
+        //initScene();
         draw3DStat("geo/italy_regions_lowres.json","");
         function chooseStat() {
           var selStat = document.getElementById("statchooser");

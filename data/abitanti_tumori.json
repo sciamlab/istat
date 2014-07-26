@@ -1,0 +1,134 @@
+{
+    "title":"Abitanti per Tasso Mortalit&agrave; Tumore",
+    "description":"Visualizza il tasso di incidenza del tumore in relazione al loro numero di abitanti. Il tasso indica il rapporto ",
+    "color_prop":"TassoTumori",
+    "color_label":"Tasso Mortalit&agrave Tumori per 100000 abitanti",
+    "color_unit":"",
+    "color_scaling_factor": 10,
+    "height_prop":"NrAbitanti",
+    "height_label":"Abitanti",
+    "height_unit":"",
+    "height_scaling_factor": 1,
+    "data":[
+        {
+            "id_regione": "13",
+            "nome_regione": "Abruzzo",
+            "TassoTumori": 273.182,
+            "NrAbitanti": 1307309
+        },
+        {
+            "id_regione": "17",
+            "nome_regione": "Basilicata",
+            "TassoTumori": 253.888,
+            "NrAbitanti": 578036
+      },
+        {
+        "id_regione": "18",
+        "nome_regione": "Calabria",
+            "TassoTumori": 230.137,
+        "NrAbitanti": 1959050
+      },
+        {
+        "id_regione": "15",
+        "nome_regione": "Campania",
+        "TassoTumori": 246.567,
+        "NrAbitanti": 5766810
+      },
+        {
+        "id_regione": "08",
+        "nome_regione": "Emilia-Romagna",
+        "TassoTumori": 326.751,
+        "NrAbitanti": 4342135
+      },
+        {
+        "id_regione": "06",
+        "nome_regione": "Friuli-Venezia Giulia",
+        "TassoTumori": 360.696,
+        "NrAbitanti": 1218985
+      },
+        {
+        "id_regione": "12",
+        "nome_regione": "Lazio",
+        "TassoTumori": 291.717,
+        "NrAbitanti": "5502886"
+      },
+        {
+        "id_regione": "07",
+        "nome_regione": "Liguria",
+        "TassoTumori": 392.07,
+        "NrAbitanti": 1570694
+      },
+        {
+        "id_regione": "03",
+        "nome_regione": "Lombardia",
+        "TassoTumori": 306.138,
+        "NrAbitanti": 9704151
+      },
+        {
+        "id_regione": "11",
+        "nome_regione": "Marche",
+        "TassoTumori": 298.195,
+        "NrAbitanti": 1541319
+      },
+        {
+        "id_regione": "14",
+        "nome_regione": "Molise",
+        "TassoTumori": 283.13,
+        "NrAbitanti": 313660
+      },
+        {
+        "id_regione": "01",
+        "nome_regione": "Piemonte",
+        "TassoTumori": 335.315,
+        "NrAbitanti": 4363916
+      },
+        {
+        "id_regione": "16",
+        "nome_regione": "Puglia",
+        "TassoTumori": 253.226,
+        "NrAbitanti": 4052566
+      },
+        {
+        "id_regione": "20",
+        "nome_regione": "Sardegna",
+        "TassoTumori": 284.554,
+        "NrAbitanti": 1639362
+      },
+        {
+        "id_regione": "19",
+        "nome_regione": "Sicilia",
+        "TassoTumori": 251.459,
+        "NrAbitanti": 5002904
+      },
+        {
+        "id_regione": "09",
+        "nome_regione": "Toscana",
+        "TassoTumori": 324.256,
+        "NrAbitanti": 3672202
+      },
+        {
+        "id_regione": "04",
+        "nome_regione": "Trentino-Alto Adige",
+        "TassoTumori": 258.19,
+        "NrAbitanti": 1029475
+      },
+        {
+        "id_regione": "10",
+        "nome_regione": "Umbria",
+        "TassoTumori": 301.168,
+        "NrAbitanti": 884268
+      },
+        {
+        "id_regione": "02",
+        "nome_regione": "Valle D'Aosta",
+        "TassoTumori": 328.036,
+        "NrAbitanti": 126806
+      },
+        {
+        "id_regione": "05",
+        "nome_regione": "Veneto",
+        "TassoTumori": 290.394,
+        "NrAbitanti": 4857210
+      }
+    ]
+}
