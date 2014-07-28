@@ -104,6 +104,7 @@ function draw3DStat(geoData,statData) {
 		title = dataset.title;
 		description = dataset.description;
 		console.log("title: "+title);
+        $("#stat-title").html(title);
 		console.log("description: "+description);
 		color_prop = dataset.color_prop;
 		height_prop = dataset.height_prop;
@@ -111,6 +112,8 @@ function draw3DStat(geoData,statData) {
 		height_scaling_factor = dataset.height_scaling_factor;
 		color_label = dataset.color_label;
 		height_label = dataset.height_label;
+        $("#stat-dimcolor").html(color_label);
+        $("#stat-dimhigh").html(height_label);
 		color_unit = dataset.color_unit;
 		height_unit = dataset.height_unit;
 		console.log("color_prop: "+color_prop);
@@ -455,7 +458,7 @@ function initGUI() {
 
 		} 
 		if(this.INTERSECTED) {
-                        ddrivetip('<p><b>'+this.hover_name+'</b><br />'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'</p>','rgba(220,228,92,0.6)', 300);
+                        ddrivetip('<p><b>'+this.hover_name+'</b><br />'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'</p>','rgba(231,231,231,0.8)', 300);
 		} else {
 			hideddrivetip();
 		}
