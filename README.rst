@@ -14,10 +14,6 @@ efficently manipulate complex 3D objects and scenarios.
 
 
 
-
-
-
-
 [1]: http://censimentoindustriaeservizi.istat.it/ "Censimento Industria e Servizi ISTAT 2011"
 [2]: http://www.khronos.org/webgl/wiki/Main_Page "WebGL wiki at Khronos"
 
