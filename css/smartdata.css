@@ -45,6 +45,44 @@
   font-family: 'Nilland-Black',sans-serif;
 }
 
+
+#slideout {
+  background: none repeat scroll 0 0 #e7e7e7;
+  border-radius: 0 5px 5px 0;
+  padding: 12px 0; 
+  position: fixed;
+  top: 150px;
+  left: 0;
+  width: 35px;
+  text-align: center;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout_inner {
+  background: none repeat scroll 0 0 #e7e7e7;
+  border-radius: 0 0 5px;
+  /*border: 1px solid #e7e7e7;*/
+  padding: 10px;
+  position: fixed;
+  top: 150px;
+  left: -260px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout:hover {
+  left: 250px;
+}
+#slideout:hover #slideout_inner {
+  left: 0;
+}
+
+
+
+
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
