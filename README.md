@@ -15,7 +15,7 @@ WebGL basedon OpenGL use the onboard accelerated Graphics Processors (GPUs) and 
 WebGL Supported Browsers
 -------------------------
 WebGL is today supported in many browsers, but in case you experience any issues in displaying it in your device you can refer to the [Compatibility Grid][#3].
-For further information on WebGL support please check on [http://get.webgl.org/]
+For further information on WebGL support please check on http://get.webgl.org/
 
 
 
