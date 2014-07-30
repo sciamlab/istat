@@ -14,7 +14,20 @@ var appConstants  = {
 		TRANSLATE_1 : 3700,
 		SCALE : 5000
 };
-var WIDTH = window.innerWidth, HEIGHT = window.innerHeight-150;
+var headerH=$('header').height();
+/*var WIDTH = window.innerWidth, HEIGHT = window.innerHeight-headerH;*/
+var WIDTH, HEIGHT , CANVAS_W, CANVAS_H;
+if($('main').width() > 768){
+    WIDTH = $('main').width();
+    HEIGHT = $('main').height();
+}else{
+    WIDTH = $('main').width();
+    HEIGHT = 200;
+}
+var offset=$('.container2').offset();
+CANVAS_W=offset.left;
+CANVAS_H=offset.top;
+
 
 var geons = {};
 var ISTAT_PARAM = {
@@ -175,7 +188,6 @@ function draw3DStat(geoData,statData) {
 				// keep track of min and max, used to color the objects
 				var maxValueAverage = 0;
 				var minValueAverage = -1;
-
 				// keep track of max and min of total value
 				var maxValueTotal = 0;
 				var minValueTotal = -1;
@@ -445,20 +457,26 @@ function initDATGUI() {
 	folder1.add( camera.position, 'z' ).listen();
 }
 
+function onDocumentMouseMove( event ) {
+    event.preventDefault();
+    mouse.x = ( (event.pageX-CANVAS_W)/ WIDTH ) * 2 - 1;
+    mouse.y =-(( (event.pageY-CANVAS_H) / HEIGHT ) * 2 - 1);
+}
+
 function initGUI() {
 
 	var onFrame = window.requestAnimationFrame;
 	this.projector = new THREE.Projector();
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
-	function onDocumentMouseMove( event ) {
+	/*function onDocumentMouseMove( event ) {
 		event.preventDefault();
         var headerH=$('header').height();
         var footerH=$('footer').height();
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		mouse.y = - ( (event.clientY-130) / (window.innerHeight-headerH-footerH-20) ) * 2 + 1;
-		// console.log('X:'+mouse.x+' Y:'+mouse.y);
-	}
+		mouse.y = - ( (event.clientY-headerH) / (window.innerHeight-headerH) ) * 2 + 1;
+		console.log('X:'+mouse.x+' Y:'+mouse.y);
+	}*/
 
 	/*
 	 * the tick() function is called for every frame
@@ -526,12 +544,24 @@ function initGUI() {
 } // end initGUI()
 
 function onWindowResize() {
-    // added header and footer calculatio for best responsive effect
-    var headerH=$('header').height();
+    // added header and footer calculation for best responsive effect
+    if($('main').width() > 768){
+        WIDTH = $('main').width();
+        HEIGHT = $('main').height();
+    }else{
+        WIDTH = $('main').width();
+        HEIGHT = 200;
+    }
+    var offset=$('.container2').offset();
+    CANVAS_W=offset.left;
+    CANVAS_H=offset.top;
 
-	camera.aspect = (window.innerWidth) / (window.innerHeight-headerH);
-	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight-headerH );
+    /*camera.aspect = (window.innerWidth) / (window.innerHeight-headerH);
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, (window.innerHeight-headerH) );*/
+    camera.aspect = (WIDTH) / (HEIGHT);
+    camera.updateProjectionMatrix();
+    renderer.setSize( WIDTH, HEIGHT);
 }
 
 function getRandomInt(min, max) {
@@ -586,6 +616,16 @@ function initScene() {
 	pointLight.position.x = 800;
 	pointLight.position.y = 1700;
 	pointLight.position.z = 800;*/
+    
+/*	var pointLight = new THREE.PointLight(0xFFFFFF ,0.6);
+    pointLight.castShadow = true;
+    pointLight.shadowDarkness = 0.5;
+    //pointLight.name="point_lateral_light";
+    scene.add(pointLight);
+	pointLight.position.x = 200;
+	pointLight.position.y = 200;
+	pointLight.position.z = 800;
+*/
 
     // add a base TRANSPARENT plane on which we'll render our map for shadow
 	/// backgroup grids 
@@ -648,11 +688,28 @@ function initScene() {
 	window.addEventListener( 'resize', onWindowResize, false );
 }
 
-function updateStats() {
-	for (var x = 0 ; x < dataset.data.length ; x++) {
-			current_color = dataset.data[x][color_prop];
-			current_height = dataset.data[x][height_prop];
 
+if($('.best-worst').length > 0){
+    var w;
+    $(window).on('load', function () {
+        $('.selectpicker').selectpicker();
+        w = $('#slider-high').slider()
+            .on('slide', updateStats)
+            .data('slider');
+
+    });
+    var updateStats = function(){
+        peso=w.getValue();
+        highval = Number(peso.toFixed(1));
+        //console.log(highval);
+		color_weight = highval 
+        height_weight = Number((1-highval).toFixed(1));
+        document.getElementById('val-dim-high').innerHTML = height_weight;
+        document.getElementById('val-dim-color').innerHTML = color_weight;
+
+        for (var x = 0 ; x < regionsort.length ; x++) {
+            current_color = dataset.data[x][color_prop];
+            current_height = dataset.data[x][height_prop];
 		    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
             normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
             //console.log("Normalized color indicator: "+normalized_color); 
@@ -661,22 +718,20 @@ function updateStats() {
             //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
 			current_rank = dataset.data[x].rank;
  	        //console.log("REG/HEIGH/COLOR/RANK: "+ dataset.data[x].nome_regione+"/"+current_height+"/"+current_color+"/"+current_rank); 
-     }
-                regionsort = dataset.data.sort(function(a,b) {
-					if (a.rank < b.rank)
-						return 1; 
-					if (a.rank > b.rank)
-						return -1; 
-                    return 0;
-                });
-
-//                console.log("SLIDER ORDINATO");
-                //console.log(regionsort);
-                $("#region-b1").html(regionsort[0]['nome_regione']);
-                $("#region-b2").html(regionsort[1]['nome_regione']);
-                $("#region-b3").html(regionsort[2]['nome_regione']);
-                $("#region-w3").html(regionsort[17]['nome_regione']);
-                $("#region-w2").html(regionsort[18]['nome_regione']);
-                $("#region-w1").html(regionsort[19]['nome_regione']);
-	
+        }
+        regionsort = dataset.data.sort(function(a,b) {
+            if (a.rank > b.rank)
+                return -1;
+            if (a.rank < b.rank)
+                return 1;
+            return 0;
+        });
+        $("#region-b1").html(regionsort[0]['nome_regione']);
+        $("#region-b2").html(regionsort[1]['nome_regione']);
+        $("#region-b3").html(regionsort[2]['nome_regione']);
+        $("#region-w3").html(regionsort[17]['nome_regione']);
+        $("#region-w2").html(regionsort[18]['nome_regione']);
+        $("#region-w1").html(regionsort[19]['nome_regione']);
+    }
 }
+

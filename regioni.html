@@ -60,23 +60,7 @@
                                     <option value='data/tumori_assunzioni.json'>Tasso mortalit&agrave; tumori / Propensione Assunzione</option>
                                 </select>
                             </div>
-                            <div class="legenda">
-                                <div class="lheader">
-                                    <h3>Legenda</h3>
-                                </div>
-                                <div class="lcontent">
-                                    <div class="height">
-                                        <span id="stat-dimhigh"></span>
-                                        <img class="img-responsive" src="img/block-height.png" alt="riferimento altezza" />
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="color">
-                                        <span id="stat-dimcolor"></span>
-                                        <div class="color-bar">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="slider-box">
                                 <h3 class="title-slider">
                                     <i class="icon-custom-link"></i>
@@ -85,14 +69,24 @@
                                 <div class="slider-content">
                                     <label id="val-dim-high">0.5</label><label class="label-dim-high" for="slider-high"></label>
                                     <input type="text" class="slider" id="slider-high" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.1" data-slider-value="0.5" data-slider-tooltip="hide" />
-                                    <label id="val-dim-color">0.5</label><label class="label-dim-color" for="slider-color"></label>
+                                    <label id="val-dim-color">0.5</label><label class="label-dim-color"></label>
                                     <!-- input type="text" class="slider" id="slider-color" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.1" data-slider-value="0.5" data-slider-tooltip="hide" / -->
                                 </div>
                             </div>
+
+                        </section>
+                        <!-- end .side-selector-->
+                    </div>
+                    <!-- start WebGL content -->
+                    <div id="3dcontainer" class="container2">
+                    </div>
+                    <!-- end WebGL content -->
+                    <div class="col-sm-3 col-sm-offset-6">
+                        <section class="side-selector side-right">
                             <div class="result-box">
                                 <h3>
                                     <i class="icon-custom-smile"></i>
-                                    Best Places
+                                    3 Best Places
                                 </h3>
                                 <ul>
                                     <li>
@@ -121,7 +115,7 @@
                             <div class="result-box">
                                 <h3>
                                     <i class="icon-custom-worst"></i>
-                                    Worst Places
+                                    3 Worst Places
                                 </h3>
                                 <ul>
                                     <li>
@@ -147,15 +141,28 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="legenda">
+                                <div class="lheader">
+                                    <h3>Legenda</h3>
+                                </div>
+                                <div class="lcontent">
+                                    <div class="height">
+                                        <span id="stat-dimhigh"></span>
+                                        <img class="img-responsive" src="img/block-height.png" alt="riferimento altezza" />
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="color">
+                                        <span id="stat-dimcolor"></span>
+                                        <div class="color-bar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </section>
-                        <!-- end .side-selector-->
                     </div>
                 </div>
             </div>
-            <!-- start WebGL content -->
-            <div id="3dcontainer" class="container2">
-            </div>
-            <!-- end WebGL content -->
+
 
              <!--start infoarea -->
             <!--<div id="slideout">-->
@@ -216,19 +223,16 @@
     <script type="text/javascript" src="js/smartlab_viz.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
     <script type="text/javascript">
-        $(window).on('load', function () {
+        /*$(window).on('load', function () {
             $('.selectpicker').selectpicker();
-            $('.slider').slider()
-              .on('slide', function(ev){
-                 highval = Number((ev.value).toFixed(1));
-                 //console.log(highval);
-                 color_weight = highval 
-                 height_weight = Number((1-highval).toFixed(1));
-                 document.getElementById('val-dim-high').innerHTML = height_weight;
-                 document.getElementById('val-dim-color').innerHTML = color_weight;
-				 updateStats();
-            });
-        });
+            var h = $('#slider-high').slider()
+                    .on('slide', updateSlider())
+                    .data('slider');
+            var c = $('#slider-color').slider()
+                    .on('slide', updateSlider())
+                    .data('slider');
+
+        });*/
     </script>
     <script type="text/javascript">
         //initScene();

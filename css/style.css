@@ -197,6 +197,7 @@ header .section_icon .logo{
 .best-worst main{
  padding-bottom: 50px;
 }
+
 .best-worst footer{
     position: relative;
     height: 50px;
@@ -205,6 +206,7 @@ header .section_icon .logo{
 .best-worst .container2{
     position:absolute;
     top:0;
+    left:0;
     width:100%;
     margin:0 auto;
 }
@@ -213,24 +215,26 @@ header .section_icon .logo{
 }
 
 .best-worst section.side-selector{
-    padding:50px 0 0 0 ;
+    padding:30px 0 0 0 ;
     position: relative;
     z-index:999;
+    font-size: 0.9em;
 }
+
 .best-worst .selector-box,
 .best-worst .slider-box{
     background: #fff url('../img/pattern_select-box.png');
-    padding:10px;
+    padding:5px;
     -moz-border-radius: 0 30px 0 0 ;
     -webkit-border-radius:0 30px 0 0 ;
     border-radius: 0 30px 0 0 ;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 .best-worst .selector-box .title-select,
 .best-worst .slider-box .title-slider{
     font-family: 'Nilland',sans-serif;
     font-weight: 900;
-    margin:10px 0;
+    margin:5px 0;
     padding:0;
     line-height: 1.2em;
     font-size: 1.2em;
@@ -248,7 +252,7 @@ header .section_icon .logo{
 
 }
 .best-worst .slider-box .slider{
-    width:90%;
+    width:90% !important;
 }
 .best-worst .slider-box .slider-handle {
     background: #000;
@@ -256,18 +260,22 @@ header .section_icon .logo{
 
 .best-worst .bootstrap-select{
     width:100% !important;
-    padding-left:20%;
-    font-size: 0.8em;
+    /*padding-left:5%;*/
+    font-size: 0.9em;
+}
+.best-worst .bootstrap-select .btn,
+.best-worst .bootstrap-select .dropdown-menu{
+    font-size: 1em;
 }
 
 .best-worst .legenda{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .best-worst .legenda .lheader{
     background: #000 url('../img/pattern_select-box.png');
     color:#fff;
-    padding:10px;
+    padding:5px;
     -moz-border-radius: 0 30px 0 0 ;
     -webkit-border-radius:0 30px 0 0 ;
     border-radius: 0 30px 0 0 ;
@@ -294,6 +302,7 @@ header .section_icon .logo{
 .best-worst .legenda .lcontent .height img{
     float:left;
     width:30%;
+    max-width:40px;
 }
 .best-worst .legenda .lcontent .color-bar{
     width:90%;
@@ -314,7 +323,7 @@ header .section_icon .logo{
     -moz-border-radius: 0 30px 0 0 ;
     -webkit-border-radius:0 30px 0 0 ;
     border-radius: 0 30px 0 0 ;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-family: 'Nilland',sans-serif;
     font-weight: 900;
 }
@@ -324,15 +333,18 @@ header .section_icon .logo{
     font-weight: 900;
     margin:0 0 0 10%;
     padding:0;
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 .best-worst .result-box h3 i{
-    font-size: 2.5em;
+    font-size: 2.2em;
 }
 .best-worst .result-box ul{
     margin:0;
     padding:0;
     list-style: none;
+}
+.best-worst .result-box ul li{
+    font-size:0.9em;
 }
 .best-worst .result-box ul li .number{
     text-align: center;
@@ -350,7 +362,7 @@ header .section_icon .logo{
 
 
 /**********************
- Responsive Layout
+   Responsive Layout
 ***********************/
 
 @media (max-width: 1200px) {
@@ -376,6 +388,9 @@ header .section_icon .logo{
         width:100%;
         margin:0 auto;
     }
+    /*.best-worst section.side-selector.side-right{
+        margin-top:300px;
+    }*/
 
 
 }
