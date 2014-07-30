@@ -1,0 +1,385 @@
+/***************************************************************
+               Stylesheet for "Il dato è tratto"
+****************************************************************/
+
+/***** @import external css file *****/
+
+@import url("bootstrap.min.css");
+@import url("font-awesome.min.css");
+@import url("custom_font.css");
+@import url("datotratto.css");
+
+/**********************
+   Global Layout
+***********************/
+html,
+body {
+    height: 100%;
+}
+
+header{
+    background:url('../img/pattern.png') top center;
+    padding:5px 0;
+}
+header .row{
+    display:table;
+    table-layout: fixed;
+    width:100%;
+    margin:0;
+}
+header .row > *{
+    display:table-cell;
+    float:none;
+    vertical-align: bottom;
+}
+main{
+    position:relative;
+}
+.container-fluid{
+    max-width: 1200px;
+    background: transparent;
+}
+
+
+/* Sticky footer styles */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -70px;
+}
+
+footer {
+    height: 70px;
+    background:url('../img/pattern.png') top center;
+    padding:4px 0;
+    font-size: 0.8em;
+}
+footer .github-link,
+footer .footer-info{
+    color:#000;
+    float:left;
+    padding:5px;
+}
+footer .footer-info a,
+footer .footer-info span{
+    display:block;
+    padding:2px 0;
+}
+
+
+#dhtmltooltip {
+    position: absolute;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #000000;
+    background-color: rgba(231,231,231,0.8);
+    border: 2px solid #e7e7e7;
+    text-align:center;
+    font-size:10pt
+}
+
+#slideout {
+    background: none repeat scroll 0 0 #e7e7e7;
+    border-radius: 0 5px 5px 0;
+    padding: 12px 0;
+    position: fixed;
+    top: 150px;
+    left: 0;
+    width: 35px;
+    text-align: center;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+#slideout_inner {
+    background: none repeat scroll 0 0 #e7e7e7;
+    border-radius: 0 0 5px;
+    /*border: 1px solid #e7e7e7;*/
+    padding: 10px;
+    position: fixed;
+    top: 150px;
+    left: -260px;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+#slideout:hover {
+    left: 250px;
+}
+#slideout:hover #slideout_inner {
+    left: 0;
+}
+
+h1.page-heading{
+    font-family: 'Nilland',sans-serif;
+    color:#000;
+    font-weight: 900;
+    font-size: 5.5em;
+    line-height: 0.8em;
+    text-align: left;
+    padding:0;
+    margin:0;
+    padding-left: 5%;
+
+}
+h1.page-heading .step{
+    position:absolute;
+    left:0;
+    font-size: 0.3em;
+}
+h1.page-heading .step .number{
+    font-family: 'Nilland';
+    font-weight: 900;
+}
+h1.page-heading span.sub-title{
+    font-size: 0.4em;
+    line-height: 0.4em;
+    color:#c4c4c4;
+    display: block;
+    text-align: center;
+}
+h1.page-heading span.gray{
+    color:#8c8c8c;
+}
+header .section_icon {
+      line-height: 1em;
+      text-align: right;
+}
+header .section_icon  i{
+    line-height: 0.3em;
+    position: relative;
+    bottom:0;
+}
+header .section_icon .logo{
+    width:100%;
+    max-width: 200px;
+    position:absolute;
+    top:102%;
+    right:0;
+    z-index:9999;
+    margin-right: 15px;
+}
+/**********************
+   Home Layout
+***********************/
+
+
+.home .box a{
+    background: url('../img/pattern_box.png') top center;
+    display: block;
+    -moz-box-shadow: -10px 10px 1px #e5e5e5;
+    -webkit-box-shadow: -10px 10px 1px #e5e5e5;
+    box-shadow: -10px 10px 1px #e5e5e5;
+    transition:All 0.3s ease;
+    -webkit-transition:All 0.3s ease;
+    -moz-transition:All 0.3s ease;
+    -o-transition:All 0.3s ease;
+}
+.home .box a:hover{
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.home main{
+    padding:60px 0 90px 0;
+}
+/**********************
+   Best Worst Layout
+***********************/
+.best-worst #wrap{
+   margin-bottom: -50px;
+}
+.best-worst main{
+ padding-bottom: 50px;
+}
+.best-worst footer{
+    position: relative;
+    height: 50px;
+    z-index:9999;
+}
+.best-worst .container2{
+    position:absolute;
+    top:0;
+    width:100%;
+    margin:0 auto;
+}
+.best-worst .container2 canvas{
+    width:100% !important;
+}
+
+.best-worst section.side-selector{
+    padding:50px 0 0 0 ;
+    position: relative;
+    z-index:999;
+}
+.best-worst .selector-box,
+.best-worst .slider-box{
+    background: #fff url('../img/pattern_select-box.png');
+    padding:10px;
+    -moz-border-radius: 0 30px 0 0 ;
+    -webkit-border-radius:0 30px 0 0 ;
+    border-radius: 0 30px 0 0 ;
+    margin-bottom: 30px;
+}
+.best-worst .selector-box .title-select,
+.best-worst .slider-box .title-slider{
+    font-family: 'Nilland',sans-serif;
+    font-weight: 900;
+    margin:10px 0;
+    padding:0;
+    line-height: 1.2em;
+    font-size: 1.2em;
+}
+.best-worst .selector-box .title-select i,
+.best-worst .slider-box .title-slider i{
+    font-size: 2em;
+}
+.best-worst .slider-box label{
+    display: block;
+    font-family: 'Nilland',sans-serif;
+    font-weight: 900;
+    line-height: 1em;
+    margin-bottom: 0;
+
+}
+.best-worst .slider-box .slider{
+    width:90%;
+}
+.best-worst .slider-box .slider-handle {
+    background: #000;
+}
+
+.best-worst .bootstrap-select{
+    width:100% !important;
+    padding-left:20%;
+    font-size: 0.8em;
+}
+
+.best-worst .legenda{
+    margin-bottom: 30px;
+}
+
+.best-worst .legenda .lheader{
+    background: #000 url('../img/pattern_select-box.png');
+    color:#fff;
+    padding:10px;
+    -moz-border-radius: 0 30px 0 0 ;
+    -webkit-border-radius:0 30px 0 0 ;
+    border-radius: 0 30px 0 0 ;
+    font-family: 'Nilland',sans-serif;
+    font-weight: 900;
+    text-align: right;
+}
+.best-worst .legenda .lheader h3{
+    margin:5px 5%;
+    font-size: 1.5em;
+}
+.best-worst .legenda .lcontent{
+    font-family: 'Nilland';
+    font-weight: 900;
+    font-size: 0.9em;
+    background: #fff url('../img/pattern_select-box.png');
+    color:#000;
+    padding:10px;
+}
+.best-worst .legenda .lcontent .height span{
+    float:left;
+    width:70%;
+}
+.best-worst .legenda .lcontent .height img{
+    float:left;
+    width:30%;
+}
+.best-worst .legenda .lcontent .color-bar{
+    width:90%;
+    height:20px;
+    display: block;
+    background: -moz-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F02B07), color-stop(100%,#0476F0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left #F02B07 0%,#0476F0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* IE10+ */
+    background: linear-gradient(to right, #F02B07 0%,#0476F0 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F02B07', endColorstr='#0476F0',GradientType=1 ); /* IE6-9 */
+}
+
+.best-worst .result-box{
+    background: #fff url('../img/pattern_select-box.png');
+    padding:10px;
+    -moz-border-radius: 0 30px 0 0 ;
+    -webkit-border-radius:0 30px 0 0 ;
+    border-radius: 0 30px 0 0 ;
+    margin-bottom: 30px;
+    font-family: 'Nilland',sans-serif;
+    font-weight: 900;
+}
+
+.best-worst .result-box h3{
+    font-family: 'Nilland',sans-serif;
+    font-weight: 900;
+    margin:0 0 0 10%;
+    padding:0;
+    font-size: 1.4em;
+}
+.best-worst .result-box h3 i{
+    font-size: 2.5em;
+}
+.best-worst .result-box ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.best-worst .result-box ul li .number{
+    text-align: center;
+    font-family: 'Nilland',sans-serif;
+    font-weight: 900;
+    font-size: 0.75em;
+    line-height: 2.6em;
+}
+.best-worst .result-box ul li:nth-child(2) .step{
+    color:#666;
+}
+.best-worst .result-box ul li:nth-child(3) .step{
+    color:#999;
+}
+
+
+/**********************
+ Responsive Layout
+***********************/
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 960px) {
+
+}
+
+@media (max-width: 768px) {
+    .home main{
+        padding:10px 0 80px 0;
+    }
+    .home .box{
+        width:80%;
+        max-width: 350px;
+        margin:40px auto;
+    }
+
+    .best-worst .container2{
+        position:relative;
+        width:100%;
+        margin:0 auto;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+
+}

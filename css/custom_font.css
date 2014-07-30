@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Nilland';
+  src: url('../fonts/Nilland.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Nilland.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Nilland.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Nilland.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Nilland.svg#e33a58e849dd01153cd2a7e4d0ecbdde') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
+
+@font-face {
+  font-family: 'Nilland';
+  src: url('../fonts/Nilland-Black.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Nilland-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Nilland-Black.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Nilland-Black.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Nilland-Black.svg#609739e43cc93e273a943bcce740cd57') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  900;
+}
+
+@font-face {
+  font-family: 'Nilland';
+  src: url('../fonts/Nilland-Bold.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Nilland-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Nilland-Bold.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Nilland-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Nilland-Bold.svg#0e65e66b72219617dea3326260680f06') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  700;
+}
+

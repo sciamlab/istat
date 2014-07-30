@@ -88,6 +88,13 @@ var height_unit;
 var title;
 var description;
 
+//var rank_regioni={};
+var color_sum=0;
+var height_sum=0;
+var color_weight = .5;
+var height_weight = .5;
+
+
 function draw3DStat(geoData,statData) {
 	var dataset_file = statData;
 	var geo_file = geoData;
@@ -113,7 +120,9 @@ function draw3DStat(geoData,statData) {
 		color_label = dataset.color_label;
 		height_label = dataset.height_label;
         $("#stat-dimcolor").html(color_label);
+        $(".label-dim-color").html(color_label);
         $("#stat-dimhigh").html(height_label);
+        $(".label-dim-high").html(height_label);
 		color_unit = dataset.color_unit;
 		height_unit = dataset.height_unit;
 		console.log("color_prop: "+color_prop);
@@ -124,6 +133,16 @@ function draw3DStat(geoData,statData) {
 		console.log("height_label: "+height_label);
 		console.log("color_unit: "+color_unit);
 		console.log("height_unit: "+height_unit);
+
+
+		for (var ix = 0 ; ix < dataset.data.length ; ix++) {
+		   color_sum=color_sum+parseFloat(dataset.data[ix][color_prop]);
+           height_sum=height_sum+parseFloat(dataset.data[ix][height_prop]);
+           //console.log('color prop: '+parseFloat(dataset.data[ix][color_prop]));
+           //console.log('height prop: '+parseFloat(dataset.data[ix][height_prop]));
+		}
+		console.log("color_sum: "+color_sum);
+		console.log("height_sum: "+height_sum);
 
 
 		// get the data
@@ -162,14 +181,18 @@ function draw3DStat(geoData,statData) {
 					var regione_id = geoFeature.properties.id_regione;
 					var current_color; // = geoFeature.properties[color_prop];
 					var current_height; // = geoFeature.properties[height_prop];
+                    var current_rank;
 					for (var ii = 0 ; ii < dataset.data.length ; ii++) {
 						if(dataset.data[ii].id_regione==regione_id){
 							current_color = dataset.data[ii][color_prop];
 							current_height = dataset.data[ii][height_prop];
+                            dataset.data[ii].rank=parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
+                            //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
+							current_rank = dataset.data[ii].rank;
 							break;
 						}
 					}
-					console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height);
+					console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height +' RANK: '+current_rank);
 					var mesh = transformSVGPathExposed(feature);
 					// add to array
 					meshes.push(mesh);
@@ -187,9 +210,27 @@ function draw3DStat(geoData,statData) {
 					if (height < minValueTotal || minValueTotal == -1) minValueTotal = height;
 					totalValues.push(height);
 				}
+                console.log("NON ORDINATO");
+				console.log(dataset.data);
+				//regionsort = dataset.data;
 
-				//console.log(" averageValues: " + averageValues);
-				//console.log(" totalValues: " + totalValues);
+                regionsort = dataset.data.sort(function(a,b) {
+					if (a.rank < b.rank)
+						return -1; 
+					if (a.rank > b.rank)
+						return 1; 
+                    return 0;
+                });
+
+                console.log("ORDINATO");
+                console.log(regionsort);
+                $("#region-b1").html(regionsort[0]['nome_regione']);
+                $("#region-b2").html(regionsort[1]['nome_regione']);
+                $("#region-b3").html(regionsort[2]['nome_regione']);
+                $("#region-w3").html(regionsort[17]['nome_regione']);
+                $("#region-w2").html(regionsort[18]['nome_regione']);
+                $("#region-w1").html(regionsort[19]['nome_regione']);
+
                 console.log(averageValues);
                 console.log(minValueAverage);
                 console.log(maxValueAverage);
@@ -248,7 +289,7 @@ function draw3DStat(geoData,statData) {
 					// add to scene
 					//scene.add(toAdd);
 					//camera.lookAt(shape3d)
-                                        console.log ("--> Adding regione: "+toAdd.name);
+                    //console.log ("--> Adding regione: "+toAdd.name);
  					regions.add(toAdd);
 				}
 				regions.castShadow = true;
@@ -356,13 +397,14 @@ function draw3DStat(geoData,statData) {
 
 		});
 
-        //var obj, i;
-        for ( i = 0; i< scene.children.length ; i++ ) {
-          obj = scene.children[ i ];
-             console.log("### GOING TO REMOVE: [id:" + obj.id+"],[name:"+obj.name+"]");
-        }
+
 
 	});
+        /*//var obj, i;
+        for ( var i = 0; i< scene.children.length ; i++ ) {
+          obj = scene.children[ i ];
+             console.log("### GOING TO REMOVE: [id:" + obj.id+"],[name:"+obj.name+"]");
+        }*/
 }
 
 var CAMERA_X;
@@ -398,8 +440,10 @@ function initGUI() {
 
 	function onDocumentMouseMove( event ) {
 		event.preventDefault();
+        var headerH=$('header').height();
+        var footerH=$('footer').height();
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		mouse.y = - ( (event.clientY-130) / (window.innerHeight-150) ) * 2 + 1;
+		mouse.y = - ( (event.clientY-130) / (window.innerHeight-headerH-footerH-20) ) * 2 + 1;
 		// console.log('X:'+mouse.x+' Y:'+mouse.y);
 	}
 
@@ -435,6 +479,7 @@ function initGUI() {
 					this.hover_name = region.nome_regione;
 					this.hover_color = region[color_prop];
 					this.hover_height = region[height_prop];
+                    this.hover_rank = region.rank;
 					break;
 				}
 			}
@@ -458,7 +503,7 @@ function initGUI() {
 
 		} 
 		if(this.INTERSECTED) {
-                        ddrivetip('<p><b>'+this.hover_name+'</b><br />'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'</p>','rgba(231,231,231,0.8)', 300);
+                        ddrivetip('<p><b>'+this.hover_name+'</b><br />'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'<br />RANK:'+this.hover_rank+'</p>','rgba(231,231,231,0.8)', 300);
 		} else {
 			hideddrivetip();
 		}
@@ -468,10 +513,12 @@ function initGUI() {
 } // end initGUI()
 
 function onWindowResize() {
+    // added header and footer calculatio for best responsive effect
+    var headerH=$('header').height();
 
-	camera.aspect = (window.innerWidth) / (window.innerHeight-150);
+	camera.aspect = (window.innerWidth) / (window.innerHeight-headerH);
 	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight-150 );
+	renderer.setSize( window.innerWidth, window.innerHeight-headerH );
 }
 
 function getRandomInt(min, max) {
@@ -588,4 +635,6 @@ function initScene() {
 	window.addEventListener( 'resize', onWindowResize, false );
 }
 
+function updateStats() {
 
+}
