@@ -616,16 +616,17 @@ function initScene() {
 	pointLight.position.x = 800;
 	pointLight.position.y = 1700;
 	pointLight.position.z = 800;*/
+
     
-/*	var pointLight = new THREE.PointLight(0xFFFFFF ,0.6);
-    pointLight.castShadow = true;
-    pointLight.shadowDarkness = 0.5;
-    //pointLight.name="point_lateral_light";
+	var pointLight = new THREE.PointLight(0xFFFFFF ,0.9);
+    //pointLight.castShadow = true;
+    pointLight.shadowDarkness = 0.6;
+    pointLight.name="point_lateral_light";
     scene.add(pointLight);
 	pointLight.position.x = 200;
 	pointLight.position.y = 200;
-	pointLight.position.z = 800;
-*/
+	pointLight.position.z = 500;
+
 
     // add a base TRANSPARENT plane on which we'll render our map for shadow
 	/// backgroup grids 
