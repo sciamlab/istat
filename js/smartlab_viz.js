@@ -89,15 +89,18 @@ var title;
 var description;
 
 //var rank_regioni={};
-var color_sum=0;
-var height_sum=0;
+
 var color_weight = .5;
 var height_weight = .5;
+var color_sum=0;
+var height_sum=0;
 
 
 function draw3DStat(geoData,statData) {
 	var dataset_file = statData;
 	var geo_file = geoData;
+	color_sum=0;
+	height_sum=0;    
         
 	if (dataset_file == '') dataset_file='data/abitanti_assunzioni.json';
 	if (geo_file == '') geo_file='geo/italy_regions_lowres.json';
@@ -106,6 +109,7 @@ function draw3DStat(geoData,statData) {
         console.log("DATA: "+dataset_file);
 
 	jQuery.getJSON(dataset_file, function(data, textStatus, jqXHR) {
+
 		dataset = data;
 		console.log("dataset: "+dataset);
 		title = dataset.title;
@@ -185,17 +189,23 @@ function draw3DStat(geoData,statData) {
 					var regione_id = geoFeature.properties.id_regione;
 					var current_color; // = geoFeature.properties[color_prop];
 					var current_height; // = geoFeature.properties[height_prop];
-                    var current_rank;
+                    var current_rank=0;
 					for (var ii = 0 ; ii < dataset.data.length ; ii++) {
 						if(dataset.data[ii].id_regione==regione_id){
 							current_color = dataset.data[ii][color_prop];
 							current_height = dataset.data[ii][height_prop];
-                            dataset.data[ii].rank=parseInt((((current_color/color_sum)*100)*color_weight*color_polarity)+(((current_height/height_sum)*100)*height_weight*height_polarity)*100);
+						    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
+				            normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
+            				//console.log("Normalized color indicator: "+normalized_color); 
+            				//console.log("Normalized height indicator: "+normalized_height); 
+            				dataset.data[ii].rank=parseInt( (normalized_color+normalized_height) *100 );
+//                            dataset.data[ii].rank=parseInt((((current_color/color_sum)*100)*color_weight*color_polarity)+(((current_height/height_sum)*100)*height_weight*height_polarity)*100);
 							current_rank = dataset.data[ii].rank;
 							break;
 						}
 					}
 					console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height +' RANK: '+current_rank);
+					console.log()	
 					var mesh = transformSVGPathExposed(feature);
 					// add to array
 					meshes.push(mesh);
@@ -642,7 +652,12 @@ function updateStats() {
 	for (var x = 0 ; x < dataset.data.length ; x++) {
 			current_color = dataset.data[x][color_prop];
 			current_height = dataset.data[x][height_prop];
-            dataset.data[x].rank=parseInt( (((current_color/color_sum)*100)*color_weight*color_polarity)+(((current_height/height_sum)*100)*height_weight*height_polarity)*100 );
+
+		    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
+            normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
+            //console.log("Normalized color indicator: "+normalized_color); 
+            //console.log("Normalized height indicator: "+normalized_height); 
+            dataset.data[x].rank=parseInt( (normalized_color+normalized_height) *100 );
             //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
 			current_rank = dataset.data[x].rank;
  	        //console.log("REG/HEIGH/COLOR/RANK: "+ dataset.data[x].nome_regione+"/"+current_height+"/"+current_color+"/"+current_rank); 
