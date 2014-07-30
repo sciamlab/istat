@@ -222,8 +222,8 @@
               .on('slide', function(ev){
                  highval = Number((ev.value).toFixed(1));
                  //console.log(highval);
-                 height_weight = highval;
-                 color_weight = Number((1-highval).toFixed(1));
+                 color_weight = highval 
+                 height_weight = Number((1-highval).toFixed(1));
                  document.getElementById('val-dim-high').innerHTML = height_weight;
                  document.getElementById('val-dim-color').innerHTML = color_weight;
 				 updateStats();

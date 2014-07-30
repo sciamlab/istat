@@ -119,6 +119,8 @@ function draw3DStat(geoData,statData) {
 		height_scaling_factor = dataset.height_scaling_factor;
 		color_label = dataset.color_label;
 		height_label = dataset.height_label;
+        color_polarity = parseInt(dataset.color_polarity);
+        height_polarity = parseInt(dataset.height_polarity);
         $("#stat-dimcolor").html(color_label);
         $(".label-dim-color").html(color_label);
         $("#stat-dimhigh").html(height_label);
@@ -133,6 +135,8 @@ function draw3DStat(geoData,statData) {
 		console.log("height_label: "+height_label);
 		console.log("color_unit: "+color_unit);
 		console.log("height_unit: "+height_unit);
+		console.log("color_polarity: "+color_polarity);
+		console.log("height_polarity: "+height_polarity);
 
 
 		for (var ix = 0 ; ix < dataset.data.length ; ix++) {
@@ -186,8 +190,7 @@ function draw3DStat(geoData,statData) {
 						if(dataset.data[ii].id_regione==regione_id){
 							current_color = dataset.data[ii][color_prop];
 							current_height = dataset.data[ii][height_prop];
-                            dataset.data[ii].rank=parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
-                            //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
+                            dataset.data[ii].rank=parseInt((((current_color/color_sum)*100)*color_weight*color_polarity)+(((current_height/height_sum)*100)*height_weight*height_polarity)*100);
 							current_rank = dataset.data[ii].rank;
 							break;
 						}
@@ -210,20 +213,20 @@ function draw3DStat(geoData,statData) {
 					if (height < minValueTotal || minValueTotal == -1) minValueTotal = height;
 					totalValues.push(height);
 				}
-                console.log("NON ORDINATO");
-				console.log(dataset.data);
+                //console.log("NON ORDINATO");
+				//console.log(dataset.data);
 				//regionsort = dataset.data;
 
                 regionsort = dataset.data.sort(function(a,b) {
 					if (a.rank < b.rank)
-						return -1; 
-					if (a.rank > b.rank)
 						return 1; 
+					if (a.rank > b.rank)
+						return -1; 
                     return 0;
                 });
 
-                console.log("ORDINATO");
-                console.log(regionsort);
+                //console.log("ORDINATO");
+                //console.log(regionsort);
                 $("#region-b1").html(regionsort[0]['nome_regione']);
                 $("#region-b2").html(regionsort[1]['nome_regione']);
                 $("#region-b3").html(regionsort[2]['nome_regione']);
@@ -636,5 +639,29 @@ function initScene() {
 }
 
 function updateStats() {
+	for (var x = 0 ; x < dataset.data.length ; x++) {
+			current_color = dataset.data[x][color_prop];
+			current_height = dataset.data[x][height_prop];
+            dataset.data[x].rank=parseInt( (((current_color/color_sum)*100)*color_weight*color_polarity)+(((current_height/height_sum)*100)*height_weight*height_polarity)*100 );
+            //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
+			current_rank = dataset.data[x].rank;
+ 	        //console.log("REG/HEIGH/COLOR/RANK: "+ dataset.data[x].nome_regione+"/"+current_height+"/"+current_color+"/"+current_rank); 
+     }
+                regionsort = dataset.data.sort(function(a,b) {
+					if (a.rank < b.rank)
+						return 1; 
+					if (a.rank > b.rank)
+						return -1; 
+                    return 0;
+                });
 
+//                console.log("SLIDER ORDINATO");
+                //console.log(regionsort);
+                $("#region-b1").html(regionsort[0]['nome_regione']);
+                $("#region-b2").html(regionsort[1]['nome_regione']);
+                $("#region-b3").html(regionsort[2]['nome_regione']);
+                $("#region-w3").html(regionsort[17]['nome_regione']);
+                $("#region-w2").html(regionsort[18]['nome_regione']);
+                $("#region-w1").html(regionsort[19]['nome_regione']);
+	
 }

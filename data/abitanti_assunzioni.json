@@ -1,14 +1,16 @@
 {
     "title":"Abitanti per Assunzioni",
     "description":"Visualizza la propensione ad assumere da parte delle regioni in relazione al loro numero di abitanti",
-    "color_prop":"PropensioneAssumere",
-    "color_label":"Propensione ad assumere",
-    "color_unit":"%",
-    "color_scaling_factor": 10,
     "height_prop":"NrAbitanti",
     "height_label":"Abitanti",
     "height_unit":"",
     "height_scaling_factor": 1,
+    "height_polarity": 1,
+    "color_prop":"PropensioneAssumere",
+    "color_label":"Propensione ad assumere",
+    "color_unit":"%",
+    "color_scaling_factor": 1,
+    "color_polarity": 1,
     "data":[
         {
             "id_regione": "13",

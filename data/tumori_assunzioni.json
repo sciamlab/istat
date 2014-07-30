@@ -1,14 +1,16 @@
 {
     "title":"Tasso Tumori e Propensione assunzione",
     "description":"Visualizza il tasso di mortalit&agrave; per tumori e la propensione ad assumere da parte delle regioni",
-    "color_prop":"PropensioneAssumere",
-    "color_label":"Propensione ad assumere",
-    "color_unit":"%",
-    "color_scaling_factor": 10,
     "height_prop":"TassoTumori",
     "height_label":"Tasso Mortalit&agrave; Tumori",
     "height_unit":"",
     "height_scaling_factor": 1,
+    "height_polarity": -1,
+    "color_prop":"PropensioneAssumere",
+    "color_label":"Propensione ad assumere",
+    "color_unit":"%",
+    "color_scaling_factor": 1,
+    "color_polarity": 1,
     "data":[
         {
             "id_regione": "13",
