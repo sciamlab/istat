@@ -19,10 +19,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.3.5/bootstrap-select.min.css">
     <!-- Bootstrap slider -->
     <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/animate.css">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="best-worst">
+<body class="best-worst work">
     <div id="wrap">
         <header>
             <div class="container-fluid">
@@ -31,7 +32,7 @@
                        <h1 class="page-heading">
                            <span class="step fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-stack-1x fa-inverse number">1</i>
+                            <i class="fa fa-stack-1x fa-inverse number">2</i>
                             </span>
                            <span class="sub-title">province/<span class="gray">imprese</span>/indicatori</span>
                            The Best Place</h1>
@@ -46,8 +47,8 @@
         <main>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
-					work in progress
+                    <div class="col-sm-8 col-sm-offset-2 work_in_progress">
+					    Work in progress
                     </div>
                 </div>
             </div>
@@ -62,7 +63,7 @@
                     <a href="http://github.com/sciamlab/istat" target="_blank" class="github-link"><i class="fa fa-github fa-3x"></i></a>
                     <div class="footer-info">
                         <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licenza Creative Commons" src="img/80x15.png" /></a>
-                        <span style="font-size:8pt;">&copy; <a href="about.html" alt="About">Il Dato &egrave; Tratto</a></span>
+                        <span class="link-about">&copy; <a href="about.html" alt="About">Il Dato &egrave; Tratto</a></span>
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.3.5/bootstrap-select.min.js"></script>
     <!-- Bootstrap slider -->
     <script type="text/javascript" src="js/bootstrap-slider.js"></script>
-    <script type="text/javascript" src="js/Detector.js"></script>
+    <!--<script type="text/javascript" src="js/Detector.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/OrbitControls.js"></script>
@@ -90,8 +91,32 @@
     <script type="text/javascript" src="js/base64.js"></script>
     <script type="text/javascript" src="js/gradient.js"></script>
     <script type="text/javascript" src="js/smartlab_viz.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>-->
+    <script type="text/javascript" src="js/jquery.lettering.js"></script>
+    <script type="text/javascript" src="js/jquery.textillate.js"></script>
     <script type="text/javascript">
+       var text =  $('.work_in_progress').textillate({
+            autoStart: false,
+            in: {
+                effect: 'fadeInDownBig',
+                shuffle: true
+            },
+            out:{
+                effect: 'hinge',
+                shuffle: true
+            }
+        });
+        $(document).ready(function(){
+            text.textillate('in');
+            $('.work_in_progress').hover(function(){
+                text.textillate('out');
+            },function(){
+                text.textillate('in');
+            });
+        });
+
+
+
         /*$(window).on('load', function () {
             $('.selectpicker').selectpicker();
             var h = $('#slider-high').slider()
@@ -105,12 +130,12 @@
     </script>
     <script type="text/javascript">
         //initScene();
-        draw3DStat("geo/italy_regions_lowres.json","");
+        /*draw3DStat("geo/italy_regions_lowres.json","");
         function chooseStat() {
             var selStat = document.getElementById("statchooser");
             var statFile = selStat.options[selStat.selectedIndex].value;
             draw3DStat("geo/italy_regions_lowres.json",statFile);
-        }
+        }*/
     </script>
 </body>
 </html>

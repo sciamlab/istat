@@ -21,7 +21,7 @@ header{
     background:url('../img/pattern.png') top center;
     padding:3px 0;
 }
-header .row{
+/*header .row{
     display:table;
     table-layout: fixed;
     width:100%;
@@ -31,7 +31,7 @@ header .row > *{
     display:table-cell;
     float:none;
     vertical-align: bottom;
-}
+}*/
 main{
     position:relative;
 }
@@ -66,6 +66,10 @@ footer .footer-info a,
 footer .footer-info span{
     display:block;
     padding:2px 0;
+}
+
+footer .link-about a{
+    display: inline;
 }
 
 
@@ -146,6 +150,9 @@ h1.page-heading span.sub-title{
 h1.page-heading span.gray{
     color:#8c8c8c;
 }
+header img.logo{
+    margin: 0 auto;
+}
 header .section_icon {
       line-height: 1em;
       text-align: right;
@@ -193,11 +200,28 @@ header .section_icon .logo{
 .home main{
     padding:60px 0 90px 0;
 }
+.home .istat-box{
+    padding:50px;
+}
+.home .istat-box img{
+    margin:0 auto !important;
+}
 /**********************
    Best Worst Layout
 ***********************/
+.best-worst header .row{
+    display:table;
+    table-layout: fixed;
+    width:100%;
+    margin:0;
+}
+.best-worst header .row > *{
+    display:table-cell;
+    float:none;
+    vertical-align: bottom;
+}
 .best-worst #wrap{
-   margin-bottom: -60px;
+   margin-bottom: -52px;
 }
 .best-worst main{
  padding-bottom: 50px;
@@ -324,12 +348,22 @@ header .section_icon .logo{
     font-family: 'Nilland',sans-serif;
     font-weight: 900;
     text-align: right;
+    position: relative;
 }
 .best-worst .legenda .lheader h3{
     margin:5px 5%;
     font-size: 1.5em;
     font-weight: 700;
     letter-spacing: 1px;
+
+}
+.best-worst .legenda .lheader h3 i{
+   position:absolute;
+    left:10%;
+    top:-5px;
+    font-weight: normal;
+    font-size: 3em;
+    line-height: 1em;
 }
 .best-worst .legenda .lcontent{
     font-family: 'Nilland';
@@ -420,6 +454,27 @@ header .section_icon .logo{
     color:#999;
 }
 
+/**********************
+ The Best Place Layout
+***********************/
+.work .work_in_progress{
+    padding:150px 0 0 0;
+    text-align: center;
+    font-family: 'Nilland',sans-serif;
+    font-weight: 700;
+    font-size: 5em;
+    color:#000;
+    letter-spacing: 0px;
+    cursor: pointer;
+}
+.work header,
+.work footer{
+    background-color: #fff;
+}
+.work #wrap{
+    background: url('../img/bg_work.jpg') center center no-repeat;
+
+}
 
 /**********************
    Responsive Layout
@@ -447,6 +502,10 @@ header .section_icon .logo{
         position:relative;
         width:100%;
         margin:0 auto;
+    }
+
+    .home .istat-box{
+        padding:20px;
     }
     /*.best-worst section.side-selector.side-right{
         margin-top:300px;

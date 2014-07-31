@@ -57,6 +57,7 @@
                                 <select id="statchooser" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat()">
                                     <option value='data/abitanti_assunzioni.json'>Popolazione / Propensione Assunzione</option>
                                     <option value='data/abitanti_tumori.json'>Popolazione / Tasso mortalit&agrave; tumori</option>
+                                    <option value='data/suicidi_assunzioni.json'>Tasso Suicidi / Propensione Assunzione</option>
                                     <option value='data/tumori_assunzioni.json'>Tasso mortalit&agrave; tumori / Propensione Assunzione</option>
                                 </select>
                             </div>
@@ -143,9 +144,9 @@
                             </div>
                             <div class="legenda">
                                 <div class="lheader">
-                                    <h3>Legenda</h3>
+                                    <h3><i class="icon-custom-legenda"></i> Legenda</h3>
                                 </div>
-                                <div class="lcontent">
+                                <div class="lcontent"> 
                                     <div class="height">
                                         <span id="stat-dimhigh"></span>
                                         <img class="img-responsive" src="img/block-height.png" alt="riferimento altezza" />
@@ -193,7 +194,7 @@
                     <a href="http://github.com/sciamlab/istat" target="_blank" class="github-link"><i class="fa fa-github fa-3x"></i></a>
                     <div class="footer-info">
                         <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licenza Creative Commons" src="img/80x15.png" /></a>
-                        <span style="font-size:8pt;">&copy; 2014 <a href="about.html" alt="About">Il Dato &egrave; Tratto</a></span>
+                        <span class="link-about">&copy; 2014 <a href="about.html" alt="About">Il Dato &egrave; Tratto</a></span>
                     </div>
                 </div>
             </div>
