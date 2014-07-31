@@ -590,10 +590,10 @@ function initScene() {
 	// add and position the camera at a fixed position
 	camera.name = "camera_main";
         scene.add(camera);
-	camera.position.x = 800;
-	camera.position.y = 1700;
+	camera.position.x = 950;
+	camera.position.y = 1100;
 	camera.position.z = 0;
-	camera.lookAt(new THREE.Vector3(0,-1000,0));
+	camera.lookAt(new THREE.Vector3(0,-100,0));
 
 	// start the renderer, and black background
 	renderer.setSize(WIDTH, HEIGHT);

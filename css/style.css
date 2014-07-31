@@ -19,7 +19,7 @@ body {
 
 header{
     background:url('../img/pattern.png') top center;
-    padding:5px 0;
+    padding:3px 0;
 }
 header .row{
     display:table;
@@ -77,7 +77,8 @@ footer .footer-info span{
     background-color: rgba(231,231,231,0.8);
     border: 2px solid #e7e7e7;
     text-align:center;
-    font-size:10pt
+    font-size:10pt;
+    z-index:99999;
 }
 
 #slideout {
@@ -136,7 +137,7 @@ h1.page-heading .step .number{
     font-weight: 900;
 }
 h1.page-heading span.sub-title{
-    font-size: 0.4em;
+    font-size: 0.38em;
     line-height: 0.4em;
     color:#c4c4c4;
     display: block;
@@ -151,8 +152,12 @@ header .section_icon {
 }
 header .section_icon  i{
     line-height: 0.3em;
-    position: relative;
-    bottom:0;
+    /*position: relative;
+    bottom:0;*/
+    font-size: 6.8em;
+    position: absolute;
+    right: 15px;
+    bottom: -16px;
 }
 header .section_icon .logo{
     width:100%;
@@ -192,10 +197,11 @@ header .section_icon .logo{
    Best Worst Layout
 ***********************/
 .best-worst #wrap{
-   margin-bottom: -50px;
+   margin-bottom: -60px;
 }
 .best-worst main{
  padding-bottom: 50px;
+    min-height: 600px;
 }
 
 .best-worst footer{
@@ -225,9 +231,9 @@ header .section_icon .logo{
 .best-worst .slider-box{
     background: #fff url('../img/pattern_select-box.png');
     padding:5px;
-    -moz-border-radius: 0 30px 0 0 ;
-    -webkit-border-radius:0 30px 0 0 ;
-    border-radius: 0 30px 0 0 ;
+    -moz-border-radius: 0 20px 0 0 ;
+    -webkit-border-radius:0 20px 0 0 ;
+    border-radius: 0 20px 0 0 ;
     margin-bottom: 10px;
 }
 .best-worst .selector-box .title-select,
@@ -252,12 +258,48 @@ header .section_icon .logo{
 
 }
 .best-worst .slider-box .slider{
-    width:90% !important;
+    width:94% !important;
+    margin-left: 1%;
 }
 .best-worst .slider-box .slider-handle {
     background: #000;
 }
-
+.best-worst .slider-box #val-dim-high,
+.best-worst .slider-box #val-dim-color{
+    display: none;
+}
+.best-worst .slider-box .label-dim-high{
+    position: relative;
+    margin-bottom: 10px;
+}
+.best-worst .slider-box .label-dim-high:before{
+    font-family: "FontAwesome";
+    content: "\f0d7";
+    font-size: 20px;
+    position:absolute;
+    bottom:-10px;
+    left:0;
+    width: 40%;
+    border-top: 2px solid #000;
+    line-height: 5px;
+}
+.best-worst .slider-box .label-dim-color{
+    text-align: right;
+    padding-right:5%;
+    position: relative;
+    margin-top: 10px;
+}
+.best-worst .slider-box .label-dim-color:after{
+    font-family: "FontAwesome";
+    content: "\f0d8";
+    font-size: 20px;
+    position:absolute;
+    top:-10px;
+    right:3%;
+    width: 40%;
+    border-bottom: 2px solid #000;
+    line-height: 5px;
+}
 .best-worst .bootstrap-select{
     width:100% !important;
     /*padding-left:5%;*/
@@ -276,9 +318,9 @@ header .section_icon .logo{
     background: #000 url('../img/pattern_select-box.png');
     color:#fff;
     padding:5px;
-    -moz-border-radius: 0 30px 0 0 ;
-    -webkit-border-radius:0 30px 0 0 ;
-    border-radius: 0 30px 0 0 ;
+    -moz-border-radius: 0 20px 0 0 ;
+    -webkit-border-radius:0 20px 0 0 ;
+    border-radius: 0 20px 0 0 ;
     font-family: 'Nilland',sans-serif;
     font-weight: 900;
     text-align: right;
@@ -286,6 +328,8 @@ header .section_icon .logo{
 .best-worst .legenda .lheader h3{
     margin:5px 5%;
     font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 .best-worst .legenda .lcontent{
     font-family: 'Nilland';
@@ -294,6 +338,7 @@ header .section_icon .logo{
     background: #fff url('../img/pattern_select-box.png');
     color:#000;
     padding:10px;
+    position: relative;
 }
 .best-worst .legenda .lcontent .height span{
     float:left;
@@ -305,8 +350,10 @@ header .section_icon .logo{
     max-width:40px;
 }
 .best-worst .legenda .lcontent .color-bar{
+    position:relative;
     width:90%;
     height:20px;
+    margin-bottom:10px;
     display: block;
     background: -moz-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F02B07), color-stop(100%,#0476F0)); /* Chrome,Safari4+ */
@@ -317,12 +364,25 @@ header .section_icon .logo{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F02B07', endColorstr='#0476F0',GradientType=1 ); /* IE6-9 */
 }
 
+.best-worst .legenda .lcontent .color-bar:before{
+    position:absolute;
+    content:"min";
+    bottom:-1.1em;
+    left:0;
+}
+.best-worst .legenda .lcontent .color-bar:after{
+    position:absolute;
+    content:"max";
+    bottom:-1.1em;
+    right:0;
+}
+
 .best-worst .result-box{
     background: #fff url('../img/pattern_select-box.png');
     padding:10px;
-    -moz-border-radius: 0 30px 0 0 ;
-    -webkit-border-radius:0 30px 0 0 ;
-    border-radius: 0 30px 0 0 ;
+    -moz-border-radius: 0 20px 0 0 ;
+    -webkit-border-radius:0 20px 0 0 ;
+    border-radius: 0 20px 0 0 ;
     margin-bottom: 10px;
     font-family: 'Nilland',sans-serif;
     font-weight: 900;
