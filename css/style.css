@@ -221,7 +221,7 @@ header .section_icon .logo{
     vertical-align: bottom;
 }
 .best-worst #wrap{
-   margin-bottom: -52px;
+   margin-bottom: -54px;
 }
 .best-worst main{
  padding-bottom: 50px;
@@ -458,7 +458,7 @@ header .section_icon .logo{
  The Best Place Layout
 ***********************/
 .work .work_in_progress{
-    padding:150px 0 0 0;
+    margin-top:150px;
     text-align: center;
     font-family: 'Nilland',sans-serif;
     font-weight: 700;
@@ -473,8 +473,35 @@ header .section_icon .logo{
 }
 .work #wrap{
     background: url('../img/bg_work.jpg') center center no-repeat;
+    overflow-y:hidden;
 
 }
+/**********************
+      About Layout
+***********************/
+.about {
+    padding:50px 15px;
+    font-family: 'Nilland',sans-serif;
+    font-weight: 700;
+    color:#000;
+}
+.about h3{
+    font-weight: 900;
+}
+.about b{
+    font-weight: 900;
+}
+.about .signature{
+    width:40%;
+    text-align: center;
+    display: block;
+    margin-left:55%;
+}
+
+.about .img-responsive{
+    margin:15px 0;
+}
+
 
 /**********************
    Responsive Layout
@@ -507,9 +534,16 @@ header .section_icon .logo{
     .home .istat-box{
         padding:20px;
     }
+    .work .work_in_progress{
+        margin-top:50px;
+    }
     /*.best-worst section.side-selector.side-right{
         margin-top:300px;
     }*/
+    .about .signature{
+        width:70%;
+        margin-left:25%;
+    }
 
 
 }
