@@ -1,6 +1,6 @@
 ![il dato e' tratto](https://raw.githubusercontent.com/sciamlab/istat/master/img/ildatoetratto.png)
 ==================
-Il dato e' tratto is an experimental data visualizion based on 3D choropleths that demonstrate how
+[Il dato e' tratto](http://istatcontest.sciamlab.com/) is an experimental data visualizion based on 3D choropleths that demonstrate how
 GeoJSON geometries projected into WebGL 3D canvas and statistical data coming from the [ISTAT 2011 industry and services census][#1] 
 can be combined to create interactive data exploration.
 
@@ -15,8 +15,6 @@ WebGL Supported Browsers
 -------------------------
 WebGL is today supported in many browsers, but in case you experience any issues in displaying it in your device you can refer to the [Compatibility Grid][#3].
 For further information on WebGL support please check on http://get.webgl.org/
-
-
 
 
 [#1]: http://censimentoindustriaeservizi.istat.it/ "Censimento Industria e Servizi ISTAT 2011"
