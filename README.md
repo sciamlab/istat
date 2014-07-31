@@ -2,7 +2,7 @@
 ==================
 Il dato e' tratto is an experimental data visualizion based on 3D choropleths that demonstrate how
 GeoJSON geometries projected into WebGL 3D canvas and statistical data coming from the [ISTAT 2011 industry and services census][#1] 
-can be combined to create interactive and immersive data exploration.
+can be combined to create interactive data exploration.
 
 
 Technologies
