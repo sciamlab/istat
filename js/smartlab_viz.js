@@ -364,7 +364,10 @@ function draw3DStat(geoData,statDataH,statDataC) {
 					// functionality provided by THREEx.KeyboardState.js
 					if ( keyboard.pressed("p") ) { // print
 						console.log(' Printing... ');
-						Canvas2Image.saveAsPNG(document.getElementById("canvas3d"));
+						var cnvs = document.getElementById("canvas3d");
+						cnvs.toBlob(function(blob) {
+							saveAs(blob, "canvas_datotratto.png");
+						});
 					}		
 
 					if ( keyboard.pressed("1") )

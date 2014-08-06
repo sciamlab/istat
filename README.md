@@ -4,7 +4,6 @@
 GeoJSON geometries projected into WebGL 3D canvas and statistical data from the [ISTAT 2011 industry and services census][#1] 
 can be combined to create interactive data exploration.
 
-
 Technologies
 ------------
 The entire application use the Khronos [WebGL][#2] features for embed 3D objects into the [HTML5 canvas element](http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#the-canvas-element)
@@ -16,6 +15,16 @@ WebGL Supported Browsers
 -------------------------
 WebGL is today supported in many browsers, but in case you experience any issues in your device you can refer to the [Compatibility Grid][#3].
 For further information on WebGL support please check on http://get.webgl.org/
+
+Feature details
+----------------
+The interactive visualization include some little goodies including:
+
+* Ability to rotate,pan and zoom using cursors or keyboard in addition to the mouse.
+* Generate PNG image directliy from the visualization canvas. This is possible using the [@eligrey/FileSaver.js](https://github.com/eligrey/FileSaver.js)
+
+
+
 
 
 [#1]: http://censimentoindustriaeservizi.istat.it/ "Censimento Industria e Servizi ISTAT 2011"
