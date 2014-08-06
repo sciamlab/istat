@@ -1,19 +1,20 @@
 ![il dato e' tratto](https://raw.githubusercontent.com/sciamlab/istat/master/img/ildatoetratto.png)
 ==================
 [Il dato e' tratto](http://istatcontest.sciamlab.com/) is an experimental data visualizion based on 3D choropleths that demonstrate how
-GeoJSON geometries projected into WebGL 3D canvas and statistical data coming from the [ISTAT 2011 industry and services census][#1] 
+GeoJSON geometries projected into WebGL 3D canvas and statistical data from the [ISTAT 2011 industry and services census][#1] 
 can be combined to create interactive data exploration.
 
 
 Technologies
 ------------
-The entire application exploit the [WebGL][#2] features from Khronos that can embed 3D objects into the [HTML5 canvas element](http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#the-canvas-element)
-and that is now available in almost all the modern browsers.
-WebGL basedon OpenGL use the onboard accelerated Graphics Processors (GPUs) and efficently manipulate complex 3D objects and scenarios
+The entire application use the Khronos [WebGL][#2] features for embed 3D objects into the [HTML5 canvas element](http://www.w3.org/html/wg/drafts/html/master/scripting-1.html#the-canvas-element)
+and that despite isn't yet a W3C standard is now available in all the modern browsers.
+WebGL is based on OpenGL and use the onboard accelerated Graphics Processors (GPUs) to efficently manipulate complex 3D objects under realistic scenarios that include cameras, lights and 
+and realtime raytracing
 
 WebGL Supported Browsers
 -------------------------
-WebGL is today supported in many browsers, but in case you experience any issues in displaying it in your device you can refer to the [Compatibility Grid][#3].
+WebGL is today supported in many browsers, but in case you experience any issues in your device you can refer to the [Compatibility Grid][#3].
 For further information on WebGL support please check on http://get.webgl.org/
 
 
