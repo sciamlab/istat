@@ -53,7 +53,7 @@ function positiontip(e){
       tipobj.style.top=curY+offsetypoint+"px";
     tipobj.style.visibility="visible";
    }
-   console.log("tip enabled: " + enabletip);
+   //console.log("tip enabled: " + enabletip);
 }
 
 function hideddrivetip(){

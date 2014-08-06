@@ -1,0 +1,29 @@
+{
+	"dim_prop":"NrAbitanti",
+    "dim_label":"Abitanti",
+    "dim_unit": "",
+    "dim_scaling_factor": 1,
+    "dim_polarity": 1,
+    "data":[
+		{ "id_regione": "13", "NrAbitanti": 1307309 },
+        { "id_regione": "17", "NrAbitanti": 578036  },
+        { "id_regione": "18", "NrAbitanti": 1959050 },
+        { "id_regione": "15", "NrAbitanti": 5766810 },
+        { "id_regione": "08", "NrAbitanti": 4342135 },
+        { "id_regione": "06", "NrAbitanti": 1218985 },
+        { "id_regione": "12", "NrAbitanti": 5502886 },
+        { "id_regione": "07", "NrAbitanti": 1570694 },
+        { "id_regione": "03", "NrAbitanti": 9704151 },
+        { "id_regione": "11", "NrAbitanti": 1541319 },
+        { "id_regione": "14", "NrAbitanti": 313660  },
+        { "id_regione": "01", "NrAbitanti": 4363916 },
+        { "id_regione": "16", "NrAbitanti": 4052566 },
+        { "id_regione": "20", "NrAbitanti": 1639362 },
+        { "id_regione": "19", "NrAbitanti": 5002904 },
+        { "id_regione": "09", "NrAbitanti": 3672202 },
+        { "id_regione": "04", "NrAbitanti": 1029475 },
+        { "id_regione": "10", "NrAbitanti": 884268  },
+        { "id_regione": "02", "NrAbitanti": 126806  },
+        { "id_regione": "05", "NrAbitanti": 4857210 }
+    ]
+}

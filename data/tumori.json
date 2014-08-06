@@ -1,0 +1,29 @@
+{
+	"dim_prop":"TassoTumori",
+    "dim_label":"Tasso Mortalit&agrave Tumori per 100000 abitanti",
+    "dim_unit": "",
+    "dim_scaling_factor": 1,
+    "dim_polarity": -1,
+    "data":[
+		{ "id_regione": "13", "TassoTumori": 273.182 },
+        { "id_regione": "17", "TassoTumori": 253.888 },
+        { "id_regione": "18", "TassoTumori": 230.137 },
+        { "id_regione": "15", "TassoTumori": 246.567 },
+        { "id_regione": "08", "TassoTumori": 326.751 },
+        { "id_regione": "06", "TassoTumori": 360.696 },
+        { "id_regione": "12", "TassoTumori": 291.717 },
+        { "id_regione": "07", "TassoTumori": 392.07  },
+        { "id_regione": "03", "TassoTumori": 306.138 },
+        { "id_regione": "11", "TassoTumori": 298.195 },
+        { "id_regione": "14", "TassoTumori": 283.13  },
+        { "id_regione": "01", "TassoTumori": 335.315 },
+        { "id_regione": "16", "TassoTumori": 253.226 },
+        { "id_regione": "20", "TassoTumori": 284.554 },
+        { "id_regione": "19", "TassoTumori": 251.459 },
+        { "id_regione": "09", "TassoTumori": 324.256 },
+        { "id_regione": "04", "TassoTumori": 258.19  },
+        { "id_regione": "10", "TassoTumori": 301.168 },
+        { "id_regione": "02", "TassoTumori": 328.036 },
+        { "id_regione": "05", "TassoTumori": 290.394 }
+    ]
+}

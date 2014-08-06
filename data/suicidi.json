@@ -1,0 +1,29 @@
+{
+	"dim_prop":"TassoSuicidi",
+    "dim_label":"Tasso Suicidi",
+    "dim_unit": "",
+    "dim_scaling_factor": 1,
+    "dim_polarity": -1,
+    "data":[
+		{ "id_regione": "13", "TassoSuicidi": 8.004 },
+        { "id_regione": "17", "TassoSuicidi": 6.695 },
+        { "id_regione": "18", "TassoSuicidi": 5.038 },
+        { "id_regione": "15", "TassoSuicidi": 3.121 },
+        { "id_regione": "08", "TassoSuicidi": 8.731 },
+        { "id_regione": "06", "TassoSuicidi": 8.640 },
+        { "id_regione": "12", "TassoSuicidi": 4.791 },
+        { "id_regione": "07", "TassoSuicidi": 5.025 },
+        { "id_regione": "03", "TassoSuicidi": 6.473 },
+        { "id_regione": "11", "TassoSuicidi": 7.598 },
+        { "id_regione": "14", "TassoSuicidi": 9.164 },
+        { "id_regione": "01", "TassoSuicidi": 9.733 },
+        { "id_regione": "16", "TassoSuicidi": 5.871 },
+        { "id_regione": "20", "TassoSuicidi": 10.02 },
+        { "id_regione": "19", "TassoSuicidi": 5.711 },
+        { "id_regione": "09", "TassoSuicidi": 5.324 },
+        { "id_regione": "04", "TassoSuicidi": 9.193 },
+        { "id_regione": "10", "TassoSuicidi": 8.605 },
+        { "id_regione": "02", "TassoSuicidi": 12.556},
+        { "id_regione": "05", "TassoSuicidi": 8.620 }
+    ]
+}

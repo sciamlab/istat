@@ -54,12 +54,32 @@
                                     <i class="icon-custom-link"></i>
                                     Cosa ti interessa vedere?
                                 </h3>
-                                <select id="statchooser" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat()">
-                                    <option value='data/abitanti_assunzioni.json'>Popolazione / Propensione Assunzione</option>
-                                    <option value='data/abitanti_tumori.json'>Popolazione / Tasso mortalit&agrave; tumori</option>
-                                    <option value='data/suicidi_assunzioni.json'>Tasso Suicidi / Propensione Assunzione</option>
-                                    <option value='data/tumori_assunzioni.json'>Tasso mortalit&agrave; tumori / Propensione Assunzione</option>
-                                </select>
+								<div class="lcontent">
+								  <div class="height">
+                                     <span id="stat-dimhigh2"></span>
+                                     <img class="img-responsive" src="img/block-height.png" alt="riferimento altezza" />                                 
+                                  <select id="statchooserH" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat(this)">
+                                      <option value='data/abitanti.json' selected>Abitanti</option>
+                                      <option value='data/assunzioni.json'>Propensione Assunzione</option>
+                                      <option value='data/suicidi.json'>Tasso Suicidi</option>
+                                      <option value='data/tumori.json'>Tasso mortalit&agrave; tumori</option>
+                                  </select>
+                                     <div class="clearfix"></div>  
+                                  </div>
+
+                                  <div class="color">
+                                     <span id="stat-dimcolor2"></span>
+                                     <div class="color-bar"></div>
+                                  <select id="statchooserC" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat(this)">
+                                      <option value='data/abitanti.json'>Abitanti</option>
+                                      <option value='data/assunzioni.json' selected>Propensione Assunzione</option>
+                                      <option value='data/suicidi.json'>Tasso Suicidi</option>
+                                      <option value='data/tumori.json'>Tasso mortalit&agrave; tumori</option>
+                                  </select>
+                                     <div class="clearfix"></div> 
+                                  </div>
+
+                                </div>
                             </div>
 
                             <div class="slider-box">
@@ -146,6 +166,7 @@
                                 <div class="lheader">
                                     <h3><i class="icon-custom-legenda"></i> Legenda</h3>
                                 </div>
+
                                 <div class="lcontent"> 
                                     <div class="height">
                                         <span id="stat-dimhigh"></span>
@@ -158,6 +179,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </section>
                     </div>
@@ -225,24 +247,25 @@
     <script type="text/javascript" src="js/popup.js"></script>
     <script src="js/ga.js"></script>
     <script type="text/javascript">
-        /*$(window).on('load', function () {
-            $('.selectpicker').selectpicker();
-            var h = $('#slider-high').slider()
-                    .on('slide', updateSlider())
-                    .data('slider');
-            var c = $('#slider-color').slider()
-                    .on('slide', updateSlider())
-                    .data('slider');
-
-        });*/
-    </script>
-    <script type="text/javascript">
         //initScene();
-        draw3DStat("geo/italy_regions_lowres.json","");
-        function chooseStat() {
-            var selStat = document.getElementById("statchooser");
-            var statFile = selStat.options[selStat.selectedIndex].value;
-            draw3DStat("geo/italy_regions_lowres.json",statFile);
+        draw3DStat("geo/italy_regions_lowres.json","","");
+        function chooseStat(actionFrom) {
+            // check in the same value is selected on both the combos
+            var selStatH = document.getElementById("statchooserH");
+            var selStatC = document.getElementById("statchooserC");
+            var statFileH = selStatH.options[selStatH.selectedIndex].value;
+            var statFileC = selStatC.options[selStatC.selectedIndex].value;
+			if (statFileH==statFileC) {
+				console.log("turn error on: "+actionFrom.id);
+				$("button[data-id="+actionFrom.id+"]")
+                    .addClass("btn-danger");
+				return false;			
+			} else {
+				$(".btn-danger")
+                    .removeClass("btn-danger");
+	            draw3DStat("geo/italy_regions_lowres.json",statFileH,statFileC);
+				return true;
+			}
         }
     </script>
     

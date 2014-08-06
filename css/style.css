@@ -273,6 +273,43 @@ header .section_icon .logo{
 .best-worst .slider-box .title-slider i{
     font-size: 2em;
 }
+
+.best-worst .selector-box .lcontent .color-bar{
+    position:relative;
+    width:30px;
+    height:30px;
+    margin-top:5px;
+    display: block;
+    background: -moz-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F02B07), color-stop(100%,#0476F0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left #F02B07 0%,#0476F0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #F02B07 0%,#0476F0 100%); /* IE10+ */
+    background: linear-gradient(to right, #F02B07 0%,#0476F0 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F02B07', endColorstr='#0476F0',GradientType=1 ); /* IE6-9 */
+	float: left;
+}
+
+.best-worst .selector-box .lcontent .color-bar:before{
+    position:absolute;
+/*    content:"min"; */
+    bottom:-1.1em;
+    left:0;
+
+}
+.best-worst .selector-box .lcontent .color-bar:after{
+    position:absolute;
+/*    content:"max"; */
+    bottom:-1.1em;
+    right:0;
+}
+
+.best-worst .selector-box .lcontent .height img {
+    float: left;
+    max-width: 30px;
+    width: 30px;
+}
+
 .best-worst .slider-box label{
     display: block;
     font-family: 'Nilland',sans-serif;
@@ -325,9 +362,9 @@ header .section_icon .logo{
     line-height: 5px;
 }
 .best-worst .bootstrap-select{
-    width:100% !important;
-    /*padding-left:5%;*/
+    width:85% !important;
     font-size: 0.9em;
+    padding: 5px 0 0 5px;
 }
 .best-worst .bootstrap-select .btn,
 .best-worst .bootstrap-select .dropdown-menu{

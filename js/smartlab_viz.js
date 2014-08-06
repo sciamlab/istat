@@ -109,328 +109,326 @@ var color_sum=0;
 var height_sum=0;
 
 
-function draw3DStat(geoData,statData) {
-	var dataset_file = statData;
+function draw3DStat(geoData,statDataH,statDataC) {
+	var dataset_fileH = statDataH;
+	var dataset_fileC = statDataC;
 	var geo_file = geoData;
 	color_sum=0;
 	height_sum=0;    
         
-	if (dataset_file == '') dataset_file='data/abitanti_assunzioni.json';
+	if (dataset_fileH == "") dataset_fileH='data/abitanti.json';
+	if (dataset_fileC == "") dataset_fileC='data/assunzioni.json';
 	if (geo_file == '') geo_file='geo/italy_regions_lowres.json';
 
         console.log("GEO: "+geo_file);
-        console.log("DATA: "+dataset_file);
+        console.log("DATAH: "+dataset_fileH);
+        console.log("DATAC: "+dataset_fileC);
 
-	jQuery.getJSON(dataset_file, function(data, textStatus, jqXHR) {
+	jQuery.getJSON(dataset_fileH, function(dataH, textStatus, jqXHR) {
 
-		dataset = data;
-		console.log("dataset: "+dataset);
-		title = dataset.title;
-		description = dataset.description;
-		console.log("title: "+title);
-        $("#stat-title").html(title);
-		console.log("description: "+description);
-		color_prop = dataset.color_prop;
-		height_prop = dataset.height_prop;
-		color_scaling_factor = dataset.color_scaling_factor;
-		height_scaling_factor = dataset.height_scaling_factor;
-		color_label = dataset.color_label;
-		height_label = dataset.height_label;
-        color_polarity = parseInt(dataset.color_polarity);
-        height_polarity = parseInt(dataset.height_polarity);
-        $("#stat-dimcolor").html(color_label);
-        $(".label-dim-color").html(color_label);
+		datasetH = dataH;
+		console.log("datasetH: "+datasetH);
+		//title = dataset.title;
+		//description = dataset.description;
+		//console.log("title: "+title);
+        //$("#stat-title").html(title);
+		//console.log("description: "+description);
+
+		height_prop = datasetH.dim_prop;
+		height_scaling_factor = datasetH.dim_scaling_factor;
+		height_label = datasetH.dim_label;
+        height_polarity = parseInt(datasetH.dim_polarity);
+		height_unit = datasetH.dim_unit;
         $("#stat-dimhigh").html(height_label);
         $(".label-dim-high").html(height_label);
-		color_unit = dataset.color_unit;
-		height_unit = dataset.height_unit;
-		console.log("color_prop: "+color_prop);
 		console.log("height_prop: "+height_prop);
-		console.log("color_scaling_factor: "+color_scaling_factor);
 		console.log("height_scaling_factor: "+height_scaling_factor);
-		console.log("color_label: "+color_label);
 		console.log("height_label: "+height_label);
-		console.log("color_unit: "+color_unit);
 		console.log("height_unit: "+height_unit);
-		console.log("color_polarity: "+color_polarity);
 		console.log("height_polarity: "+height_polarity);
 
-
-		for (var ix = 0 ; ix < dataset.data.length ; ix++) {
-		   color_sum=color_sum+parseFloat(dataset.data[ix][color_prop]);
-           height_sum=height_sum+parseFloat(dataset.data[ix][height_prop]);
-           //console.log('color prop: '+parseFloat(dataset.data[ix][color_prop]));
-           //console.log('height prop: '+parseFloat(dataset.data[ix][height_prop]));
+		for (var ix = 0 ; ix < datasetH.data.length ; ix++) {
+	       height_sum=height_sum+parseFloat(datasetH.data[ix][height_prop]);
 		}
-		console.log("color_sum: "+color_sum);
 		console.log("height_sum: "+height_sum);
 
+		jQuery.getJSON(dataset_fileC, function(dataC, textStatus, jqXHR) {
 
-		// get the data
-		jQuery.getJSON(geo_file, function(data, textStatus, jqXHR) {
+			datasetC = dataC;
+			console.log("datasetC: "+datasetC);
 
-			geojson = data;
-			console.log("geojson: "+geojson);
-			initScene();
-			initGUI();
-			addGeoObject();
-			renderer.render( scene, camera );
-			animate();
+			color_prop = datasetC.dim_prop;
+			color_scaling_factor = datasetC.dim_scaling_factor;
+			color_label = datasetC.dim_label;
+		    color_polarity = parseInt(datasetC.dim_polarity);
+			color_unit = datasetC.dim_unit;
+		    $("#stat-dimcolor").html(color_label);
+		    $(".label-dim-color").html(color_label);
 
-			// add the loaded gis object (in geojson format) to the map
-			function addGeoObject() {
-				// keep track of rendered objects
-				var meshes = [];
-				var averageValues = [];
-				var totalValues = [];
+			console.log("color_prop: "+color_prop);
+			console.log("color_scaling_factor: "+color_scaling_factor);
+			console.log("color_label: "+color_label);
+			console.log("color_unit: "+color_unit);
+			console.log("color_polarity: "+color_polarity);
 
-
-				// keep track of min and max, used to color the objects
-				var maxValueAverage = 0;
-				var minValueAverage = -1;
-				// keep track of max and min of total value
-				var maxValueTotal = 0;
-				var minValueTotal = -1;
-
-				// loop on GeoJSON available features
-				// and convert each into mesh and calculate values
-				for (var i = 0 ; i < geojson.features.length ; i++) {
-					var geoFeature = geojson.features[i]
-					var feature = geo.path(geoFeature);
-					// we only need to convert it to a three.js path
-					var regione_id = geoFeature.properties.id_regione;
-					var current_color; // = geoFeature.properties[color_prop];
-					var current_height; // = geoFeature.properties[height_prop];
-                    var current_rank=0;
-					for (var ii = 0 ; ii < dataset.data.length ; ii++) {
-						if(dataset.data[ii].id_regione==regione_id){
-							current_color = dataset.data[ii][color_prop];
-							current_height = dataset.data[ii][height_prop];
-						    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
-				            normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
-            				//console.log("Normalized color indicator: "+normalized_color); 
-            				//console.log("Normalized height indicator: "+normalized_height); 
-            				dataset.data[ii].rank=parseInt( (normalized_color+normalized_height) *100 );
-//                            dataset.data[ii].rank=parseInt((((current_color/color_sum)*100)*color_weight*color_polarity)+(((current_height/height_sum)*100)*height_weight*height_polarity)*100);
-							current_rank = dataset.data[ii].rank;
-							break;
-						}
-					}
-					console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height +' RANK: '+current_rank);
-					console.log()	
-					var mesh = transformSVGPathExposed(feature);
-					// add to array
-					meshes.push(mesh);
-
-					// we get a property from the json object and use it
-					// to determine the color later on
-					var color = parseInt(current_color*color_scaling_factor);// getRandomInt(22,6046);
-					if (color > maxValueAverage) maxValueAverage = color;
-					if (color < minValueAverage || minValueAverage == -1) minValueAverage = color;
-					averageValues.push(color);
-
-					// and we get the max values to determine height later on.
-					var height = parseInt(current_height*height_scaling_factor); //getRandomInt(5800,15500);
-					if (height > maxValueTotal) maxValueTotal = height;
-					if (height < minValueTotal || minValueTotal == -1) minValueTotal = height;
-					totalValues.push(height);
-				}
-                //console.log("NON ORDINATO");
-				//console.log(dataset.data);
-				//regionsort = dataset.data;
-
-                regionsort = dataset.data.sort(function(a,b) {
-					if (a.rank < b.rank)
-						return 1; 
-					if (a.rank > b.rank)
-						return -1; 
-                    return 0;
-                });
-
-                //console.log("ORDINATO");
-                //console.log(regionsort);
-                $("#region-b1").html(regionsort[0]['nome_regione']);
-                $("#region-b2").html(regionsort[1]['nome_regione']);
-                $("#region-b3").html(regionsort[2]['nome_regione']);
-                $("#region-w3").html(regionsort[17]['nome_regione']);
-                $("#region-w2").html(regionsort[18]['nome_regione']);
-                $("#region-w1").html(regionsort[19]['nome_regione']);
-
-                console.log(averageValues);
-                console.log(minValueAverage);
-                console.log(maxValueAverage);
-				// we've got our paths now extrude them to a height and add a color
-				for (var i = 0 ; i < averageValues.length ; i++) {
-
-					// create material color based on average
-					var scale = ((averageValues[i] - minValueAverage) / (maxValueAverage - minValueAverage)) * 255;
-					//console.log("###SCALE:" + scale);
-
-					var mathColor = jsgradient.generateGradient('#F02B07','#0476F0',averageValues[i],minValueAverage,maxValueAverage); // gradient5(averageValues[i]);gradient5(averageValues[i]); // gradient(Math.round(scale),50);
-
-					var material = new THREE.MeshLambertMaterial({
-						color: mathColor,
-						//ambient: mathColor,
-						//emissive: mathColor
-					});
-
-					// create extrude based on total
-					var extrude = (((totalValues[i] - minValueTotal) / (maxValueTotal - minValueTotal)) * 100 )+50;
-//					OLD ONE		  var shape3d = meshes[i].extrude({amount: Math.round(extrude), bevelEnabled: false});
-
-					var mes = meshes[i];
-					//console.log("## MESH: "+mes.toSource());
-					//console.log("## MESH: "+typeof mes);
-					var vec1 = new THREE.Vector3( 100, extrude,-100);
-					var vec2 = new THREE.Vector3( 100, 30,-100);
-
-
-					var randomPoints = [];
-					randomPoints.push(vec1); randomPoints.push(vec2);
-					var randomSpline =  new THREE.SplineCurve3( randomPoints );
-
-
-					var shape3d = mes.extrude({amount: Math.round(extrude), bevelEnabled: true, bevelThickness  : 20, bevelSize: 10, bevelSegments: 10, extrudePath: randomSpline});
-
-					shape3d.castShadow = true;
-					//console.log('['+i+'] - SCALE: '+scale+' MATHCOLOR:'+mathColor+' EXTRUDE: '+Math.round(extrude));
-
-					// create a mesh based on material and extruded shape
-					var toAdd = new THREE.Mesh(shape3d, material);
-					toAdd.castShadow = true;
-					toAdd.name = geojson.features[i].properties.id_regione;
-					// rotate and position the elements nicely in the center
-					//toAdd.rotation.x = Math.PI/2;
-					//toAdd.translateX(-490);
-					//toAdd.translateZ(50);
-					//toAdd.translateY(extrude/2);
-
-					//toAdd.rotation.y =0.35
-					//toAdd.translateY(700);
-					//toAdd.translateX(-690);
-					//toAdd.translateZ(50);
-					//toAdd.translateY(extrude/2);
-
-					// add to scene
-					//scene.add(toAdd);
-					//camera.lookAt(shape3d)
-                    //console.log ("--> Adding regione: "+toAdd.name);
- 					regions.add(toAdd);
-				}
-				regions.castShadow = true;
-				scene.add(regions);
+			for (ix = 0 ; ix < datasetC.data.length ; ix++) {
+			   color_sum=color_sum+parseFloat(datasetC.data[ix][color_prop]);
 			}
+			console.log("color_sum: "+color_sum);
 
+			// get the data
+			jQuery.getJSON(geo_file, function(data, textStatus, jqXHR) {
 
-			// simple gradient function
-			function gradient(length, maxLength) {
-
-				var i = (length * 255 / maxLength);
-				var r = i;
-				var g = 255-(i);
-				var b = 1;
-
-				var rgb = b | (g << 8) | (r << 16);
-				return rgb;
-			}
-
-
-			function gradient5(val) {
-				col='';
-				if (val == 252) {
-					col='#00e3e5'; //'#5dbbea';
-				} else if (val == 275) {
-					col='#009fd8';//'#1ea9e1';
-				} else if (val == 294) {
-					col='#005bcb';//'#0893d3';
-				} else if (val == 295) {
-					col='#0018bf';//'#0077c1';
-				} else {
-					col='#0018bf';//'#004f98';
-				}
-				return col;
-			}
-
-
-			function animate() 
-			{
-				requestAnimationFrame( animate );
-				render();		
-				update();
-			}
-
-			function update()
-			{
-				// delta = change in time since last call (in seconds)
-				//var delta = clock.getDelta(); 
-
-				// functionality provided by THREEx.KeyboardState.js
-				if ( keyboard.pressed("p") ) { // print
-					Canvas2Image.saveAsPNG(document.getElementById("canvas3d"));
-				}		
-
-				if ( keyboard.pressed("1") )
-					document.getElementById('message').innerHTML = ' Have a nice day! - 1';	
-				if ( keyboard.pressed("2") )
-					document.getElementById('message').innerHTML = ' Have a nice day! - 2 ';	
-				//document.getElementById('message').innerHTML = 'CAMERA<br>X: '+Math.round(camera.position.x)+"<br>Y: "+Math.round(camera.position.y)+"<br>Z: "+Math.round(camera.position.z);	
-				controls.update();
-
-				//stats.update();
-
-			}
-
-			function render() 
-			{	
+				geojson = data;
+				//console.log("geojson: "+geojson);
+				initScene();
+				initGUI();
+				addGeoObject();
 				renderer.render( scene, camera );
-			} 
+				animate();
 
-			function buildAxes( length ) {
-				var axes = new THREE.Object3D();
+				// add the loaded gis object (in geojson format) to the map
+				function addGeoObject() {
+					// keep track of rendered objects
+					var meshes = [];
+					var averageValues = [];
+					var totalValues = [];
 
-				axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X red
-				axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X red
-				axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y green
-				axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y gree
-				axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z blue
-				axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z blue
 
-				return axes;
+					// keep track of min and max, used to color the objects
+					var maxValueAverage = 0;
+					var minValueAverage = -1;
+					// keep track of max and min of total value
+					var maxValueTotal = 0;
+					var minValueTotal = -1;
 
-			}
+					// loop on GeoJSON available feature
+					// and convert each into mesh and calculate values
+					for (var i = 0 ; i < geojson.features.length ; i++) {
+						var geoFeature = geojson.features[i]
+						var feature = geo.path(geoFeature);
+						// we only need to convert it to a three.js path
+						var regione_id = geoFeature.properties.id_regione;
+						var current_color; // = geoFeature.properties[color_prop];
+						var current_height; // = geoFeature.properties[height_prop];
+		                var current_rank=0;
+						// both the dataset have the same number of elements
+						// calculate the rank of each region based on balanced weigthed average
+						for (var ii = 0 ; ii < datasetH.data.length ; ii++) {
+							if(datasetH.data[ii].id_regione==regione_id){
+								// add the nome_regione to the datasetH statistical data
+								// it will be useful later to transfer it to the top/worst three region labels
+								datasetH.data[ii].nome_regione=geoFeature.properties.nome_regione;
+								current_color = datasetC.data[ii][color_prop];
+								current_height = datasetH.data[ii][height_prop];
+								normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
+						        normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
+		        				//console.log("Normalized color indicator: "+normalized_color); 
+		        				//console.log("Normalized height indicator: "+normalized_height); 
+		        				datasetH.data[ii].rank=parseInt( (normalized_color+normalized_height) *100 );
+		        				datasetC.data[ii].rank=parseInt( (normalized_color+normalized_height) *100 );
+								current_rank = datasetH.data[ii].rank;
+								break;
+							}
+						}
+						console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height +' RANK: '+current_rank);
+						console.log()	
+						var mesh = transformSVGPathExposed(feature);
+						// add to array
+						meshes.push(mesh);
 
-			function buildAxis( src, dst, colorHex, dashed ) {
-				var geom = new THREE.Geometry(),
-				mat;
+						// we get a property from the json object and use it
+						// to determine the color later on
+						var color = parseInt(current_color*color_scaling_factor);// getRandomInt(22,6046);
+						if (color > maxValueAverage) maxValueAverage = color;
+						if (color < minValueAverage || minValueAverage == -1) minValueAverage = color;
+						averageValues.push(color);
 
-				if(dashed) {
-					mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
-				} else {
-					mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+						// and we get the max values to determine height later on.
+						var height = parseInt(current_height*height_scaling_factor); //getRandomInt(5800,15500);
+						if (height > maxValueTotal) maxValueTotal = height;
+						if (height < minValueTotal || minValueTotal == -1) minValueTotal = height;
+						totalValues.push(height);
+					}
+		            //console.log("NON ORDINATO");
+					//console.log(dataset.data);
+					//regionsort = dataset.data;
+
+					var neutralDataset = jQuery.extend(true, {}, datasetH);
+ 
+		            regionsort = neutralDataset.data.sort(function(a,b) {
+						if (a.rank < b.rank)
+							return 1; 
+						if (a.rank > b.rank)
+							return -1; 
+		                return 0;
+		            });
+
+		            //console.log("ORDINATO");
+		            //console.log(regionsort);
+		            $("#region-b1").html(regionsort[0]['nome_regione']);
+		            $("#region-b2").html(regionsort[1]['nome_regione']);
+		            $("#region-b3").html(regionsort[2]['nome_regione']);
+		            $("#region-w3").html(regionsort[17]['nome_regione']);
+		            $("#region-w2").html(regionsort[18]['nome_regione']);
+		            $("#region-w1").html(regionsort[19]['nome_regione']);
+
+		            console.log(averageValues);
+		            console.log(minValueAverage);
+		            console.log(maxValueAverage);
+					// we've got our paths now extrude them to a height and add a color
+					for (var i = 0 ; i < averageValues.length ; i++) {
+
+						// create material color based on average
+						var scale = ((averageValues[i] - minValueAverage) / (maxValueAverage - minValueAverage)) * 255;
+						//console.log("###SCALE:" + scale);
+
+						var mathColor = jsgradient.generateGradient('#F02B07','#0476F0',averageValues[i],minValueAverage,maxValueAverage); // gradient5(averageValues[i]);gradient5(averageValues[i]); // gradient(Math.round(scale),50);
+
+						var material = new THREE.MeshLambertMaterial({
+							color: mathColor,
+							//ambient: mathColor,
+							//emissive: mathColor
+						});
+
+						// create extrude based on total
+						var extrude = (((totalValues[i] - minValueTotal) / (maxValueTotal - minValueTotal)) * 100 )+50;
+
+						var mes = meshes[i];
+						//console.log("## MESH: "+mes.toSource());
+						//console.log("## MESH: "+typeof mes);
+						var vec1 = new THREE.Vector3( 100, extrude,-100);
+						var vec2 = new THREE.Vector3( 100, 30,-100);
+
+						var randomPoints = [];
+						randomPoints.push(vec1); randomPoints.push(vec2);
+						var randomSpline =  new THREE.SplineCurve3( randomPoints );
+
+						var shape3d = mes.extrude({amount: Math.round(extrude), bevelEnabled: true, bevelThickness  : 20, bevelSize: 10, bevelSegments: 10, extrudePath: randomSpline});
+
+						shape3d.castShadow = true;
+						//console.log('['+i+'] - SCALE: '+scale+' MATHCOLOR:'+mathColor+' EXTRUDE: '+Math.round(extrude));
+
+						// create a mesh based on material and extruded shape
+						var toAdd = new THREE.Mesh(shape3d, material);
+						toAdd.castShadow = true;
+						toAdd.name = geojson.features[i].properties.id_regione;
+	 					regions.add(toAdd);
+					}
+					regions.castShadow = true;
+					scene.add(regions);
 				}
 
-				geom.vertices.push( src.clone() );
-				geom.vertices.push( dst.clone() );
-				geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+				// simple gradient function
+				function gradient(length, maxLength) {
 
-				var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+					var i = (length * 255 / maxLength);
+					var r = i;
+					var g = 255-(i);
+					var b = 1;
 
-				return axis;
-
-			}
-
-
-		});
-
+					var rgb = b | (g << 8) | (r << 16);
+					return rgb;
+				}
 
 
-	});
+				function gradient5(val) {
+					col='';
+					if (val == 252) {
+						col='#00e3e5'; //'#5dbbea';
+					} else if (val == 275) {
+						col='#009fd8';//'#1ea9e1';
+					} else if (val == 294) {
+						col='#005bcb';//'#0893d3';
+					} else if (val == 295) {
+						col='#0018bf';//'#0077c1';
+					} else {
+						col='#0018bf';//'#004f98';
+					}
+					return col;
+				}
+
+
+				function animate() 
+				{
+					requestAnimationFrame( animate );
+					render();		
+					update();
+				}
+
+				function update()
+				{
+					// delta = change in time since last call (in seconds)
+					//var delta = clock.getDelta(); 
+
+					// functionality provided by THREEx.KeyboardState.js
+					if ( keyboard.pressed("p") ) { // print
+						console.log(' Printing... ');
+						Canvas2Image.saveAsPNG(document.getElementById("canvas3d"));
+					}		
+
+					if ( keyboard.pressed("1") )
+						console.log(' Have a nice day! - 1');	
+					if ( keyboard.pressed("2") )
+						console.log(' Have a nice day! - 2');	
+					//document.getElementById('message').innerHTML = 'CAMERA<br>X: '+Math.round(camera.position.x)+"<br>Y: "+Math.round(camera.position.y)+"<br>Z: "+Math.round(camera.position.z);	
+					controls.update();
+
+					//stats.update();
+
+				}
+
+				function render() 
+				{	
+					renderer.render( scene, camera );
+				} 
+
+				function buildAxes( length ) {
+					var axes = new THREE.Object3D();
+
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X red
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X red
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y green
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y gree
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z blue
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z blue
+
+					return axes;
+
+				}
+
+				function buildAxis( src, dst, colorHex, dashed ) {
+					var geom = new THREE.Geometry(),
+					mat;
+
+					if(dashed) {
+						mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
+					} else {
+						mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+					}
+
+					geom.vertices.push( src.clone() );
+					geom.vertices.push( dst.clone() );
+					geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+					var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+
+					return axis;
+
+				}
+
+
+
+			}); // end loading/rendering geodata
+		}); // end loading color dimension
+	}); //end loading high dimension
+
         /*//var obj, i;
         for ( var i = 0; i< scene.children.length ; i++ ) {
           obj = scene.children[ i ];
              console.log("### GOING TO REMOVE: [id:" + obj.id+"],[name:"+obj.name+"]");
         }*/
-}
+} // end draw3DStat
 
 var CAMERA_X;
 var CAMERA_Y;
@@ -440,6 +438,8 @@ var mouse = { x: 0, y: 0 }
 var hover_name;
 var hover_color;
 var hover_height;
+
+
 
 
 function initDATGUI() {
@@ -504,13 +504,14 @@ function initGUI() {
 				}*/
 
 			this.INTERSECTED = intersects[ 0 ].object;
-			for (var i = 0 ; i < dataset.data.length ; i++) {
-				var region = dataset.data[i];
-				if(region.id_regione == this.INTERSECTED.name){
-					this.hover_name = region.nome_regione;
-					this.hover_color = region[color_prop];
-					this.hover_height = region[height_prop];
-                    this.hover_rank = region.rank;
+			for (var i = 0 ; i < datasetH.data.length ; i++) {
+				var regionH = datasetH.data[i];
+				var regionC = datasetC.data[i];
+				if(regionH.id_regione == this.INTERSECTED.name){
+					this.hover_name = regionH.nome_regione;
+					this.hover_color = regionC[color_prop];
+					this.hover_height = regionH[height_prop];
+                    this.hover_rank = regionH.rank;
 					break;
 				}
 			}
@@ -534,7 +535,8 @@ function initGUI() {
 
 		} 
 		if(this.INTERSECTED) {
-                        ddrivetip('<p><b>'+this.hover_name+'</b><br />'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'<br />RANK:'+this.hover_rank+'</p>','rgba(231,231,231,0.8)', 300);
+						
+                        ddrivetip('<p><h4 style="font-family:Nilland,sans-serif;font-weight:900;">'+this.hover_name+'</h4>'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'<br />RANK:'+this.hover_rank+'</p>','rgba(231,231,231,0.8)', 300);
 		} else {
 			hideddrivetip();
 		}
@@ -699,6 +701,7 @@ if($('.best-worst').length > 0){
             .data('slider');
 
     });
+
     var updateStats = function(){
         peso=w.getValue();
         highval = Number(peso.toFixed(1));
@@ -709,24 +712,27 @@ if($('.best-worst').length > 0){
         document.getElementById('val-dim-color').innerHTML = color_weight;
 
         for (var x = 0 ; x < regionsort.length ; x++) {
-            current_color = dataset.data[x][color_prop];
-            current_height = dataset.data[x][height_prop];
+            current_color = datasetC.data[x][color_prop];
+            current_height = datasetH.data[x][height_prop];
 		    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
             normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
             //console.log("Normalized color indicator: "+normalized_color); 
             //console.log("Normalized height indicator: "+normalized_height); 
-            dataset.data[x].rank=parseInt( (normalized_color+normalized_height) *100 );
+            datasetH.data[x].rank=parseInt( (normalized_color+normalized_height) *100 );
             //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
-			current_rank = dataset.data[x].rank;
+			current_rank = datasetH.data[x].rank;
  	        //console.log("REG/HEIGH/COLOR/RANK: "+ dataset.data[x].nome_regione+"/"+current_height+"/"+current_color+"/"+current_rank); 
         }
-        regionsort = dataset.data.sort(function(a,b) {
+
+		var neutralDataset = jQuery.extend(true, {}, datasetH);
+        regionsort = neutralDataset.data.sort(function(a,b) {
             if (a.rank > b.rank)
                 return -1;
             if (a.rank < b.rank)
                 return 1;
             return 0;
         });
+
         $("#region-b1").html(regionsort[0]['nome_regione']);
         $("#region-b2").html(regionsort[1]['nome_regione']);
         $("#region-b3").html(regionsort[2]['nome_regione']);
