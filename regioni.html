@@ -7,7 +7,7 @@
     <meta name="description" content="SciamLab SmartData Viewver">
     <meta name="author" content="Alessio Dragoni (ad@sciamlab.com)">
     <link rel="shortcut icon" href="img/favicon.ico">
-    <title>Il Dato &egrave; tratto! Confronto indicatori del Censimento Imprese ISTAT 2011</title>
+    <title>Il Dato &egrave; tratto! Abitanti e Propensione all'Assunzione @istat_it #datachallenge </title>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -23,6 +23,15 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="best-worst">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1445834042360800&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     <div id="wrap">
         <header>
             <div class="container-fluid">
@@ -49,6 +58,7 @@
                     <div class="col-sm-3">
                         <!-- start .side-selector -->
                         <section class="side-selector">
+
                             <div class="selector-box">
                                 <h3 class="title-select">
                                     <i class="icon-custom-link"></i>
@@ -59,26 +69,24 @@
                                      <span id="stat-dimhigh2"></span>
                                      <img class="img-responsive" src="img/block-height.png" alt="riferimento altezza" />                                 
                                   <select id="statchooserH" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat(this)">
-                                      <option value='data/abitanti.json' selected>Abitanti</option>
-                                      <option value='data/assunzioni.json'>Propensione Assunzione</option>
-                                      <option value='data/suicidi.json'>Tasso Suicidi</option>
-                                      <option value='data/tumori.json'>Tasso mortalit&agrave; tumori</option>
+                                      <option value='abitanti' selected>Abitanti</option>
+                                      <option value='assunzioni'>Propensione Assunzione</option>
+                                      <option value='suicidi'>Tasso Suicidi</option>
+                                      <option value='tumori'>Tasso mortalit&agrave; tumori</option>
                                   </select>
                                      <div class="clearfix"></div>  
                                   </div>
-
                                   <div class="color">
                                      <span id="stat-dimcolor2"></span>
                                      <div class="color-bar"></div>
                                   <select id="statchooserC" class="selectpicker show-menu-arrow" data-width="auto" onchange="chooseStat(this)">
-                                      <option value='data/abitanti.json'>Abitanti</option>
-                                      <option value='data/assunzioni.json' selected>Propensione Assunzione</option>
-                                      <option value='data/suicidi.json'>Tasso Suicidi</option>
-                                      <option value='data/tumori.json'>Tasso mortalit&agrave; tumori</option>
+                                      <option value='abitanti'>Abitanti</option>
+                                      <option value='assunzioni' selected>Propensione Assunzione</option>
+                                      <option value='suicidi'>Tasso Suicidi</option>
+                                      <option value='tumori'>Tasso mortalit&agrave; tumori</option>
                                   </select>
                                      <div class="clearfix"></div> 
                                   </div>
-
                                 </div>
                             </div>
 
@@ -94,6 +102,37 @@
                                     <!-- input type="text" class="slider" id="slider-color" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.1" data-slider-value="0.5" data-slider-tooltip="hide" / -->
                                 </div>
                             </div>
+
+                            <div class="sshare-box">
+                                <h3 class="title-sshare">
+                                    <i class="icon-custom-link"></i>
+                                    Condividi visualizzazione!
+                                </h3>
+                                <div class="sshare-content">
+ 									<div class="twitter-sshare" style="float:left;padding:0 3px 0 3px;">
+										<a href="https://twitter.com/share" class="twitter-share-button" data-lang="it" data-count="none">Tweet</a>
+										<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+									</div>
+									<div class="sshare-gplus" style="float:left;padding:0 3px 0 3px;">
+										<div class="g-plus" data-action="share" data-annotation="none"></div>
+										<!-- Inserisci questo tag dopo l'ultimo tag di condividi. -->
+										<script type="text/javascript">
+										  window.___gcfg = {lang: 'it'};
+
+										  (function() {
+											var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+											po.src = 'https://apis.google.com/js/platform.js';
+											var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+										  })();
+										</script>
+									</div>
+
+									<div class="sshare-fb" style="padding:0 3px 0 3px;">
+										<div class="fb-share-button" data-type="button" data-href="http://istatcontest.sciamlab.com" data-width="200"></div>
+									</div>
+                                </div>
+                            </div>
+	
 
                         </section>
                         <!-- end .side-selector-->
@@ -215,8 +254,11 @@
                 <div class="col-sm-5">
                     <a href="http://github.com/sciamlab/istat" target="_blank" class="github-link"><i class="fa fa-github fa-3x"></i></a>
                     <div class="footer-info">
-                        <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licenza Creative Commons" src="img/80x15.png" /></a>
-                        <span class="link-about">&copy; 2014 <a href="about.html" alt="About">Il Dato &egrave; Tratto</a></span>
+						<img src="img/lgplv3.png" style="max-height: 30px;float: left;padding:3px 7px 0 0"/>
+                        <div style="float:right">
+                           <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licenza Creative Commons" src="img/80x15.png" /></a>
+                           <span class="link-about">&copy; 2014 <a href="about.html" alt="About">Il Dato &egrave; Tratto</a></span>
+                        <div>
                     </div>
                 </div>
             </div>
@@ -250,8 +292,8 @@
     <script src="js/FileSaver.js"></script>
 
     <script type="text/javascript">
-        //initScene();
-        draw3DStat("geo/italy_regions_lowres.json","","");
+
+        draw3DStat("geo/regioni.json",h,c);
         function chooseStat(actionFrom) {
             // check in the same value is selected on both the combos
             var selStatH = document.getElementById("statchooserH");
@@ -266,7 +308,7 @@
 			} else {
 				$(".btn-danger")
                     .removeClass("btn-danger");
-	            draw3DStat("geo/italy_regions_lowres.json",statFileH,statFileC);
+	            draw3DStat("geo/regioni.json",statFileH,statFileC);
 				return true;
 			}
         }

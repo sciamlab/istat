@@ -87,6 +87,15 @@ var urlParams;
 		urlParams[decode(match[1])] = decode(match[2]);
 })();
 
+//check request
+var	h = (urlParams.h=="" || urlParams.h==null) ? "abitanti" : urlParams.h,
+c = (urlParams.c=="" || urlParams.c==null) ? "assunzioni" : urlParams.c,
+hwc = (urlParams.hwc=="" || urlParams.hwc==null) ? "0.5" : urlParams.hwc;
+console.log("H: "+h);		
+console.log("C: "+c);
+console.log("HWC: "+hwc);
+
+
 var geojson;
 var dataset;
 var dataset_file;
@@ -101,8 +110,6 @@ var height_unit;
 var title;
 var description;
 
-//var rank_regioni={};
-
 var color_weight = .5;
 var height_weight = .5;
 var color_sum=0;
@@ -116,15 +123,15 @@ function draw3DStat(geoData,statDataH,statDataC) {
 	color_sum=0;
 	height_sum=0;    
         
-	if (dataset_fileH == "") dataset_fileH='data/abitanti.json';
-	if (dataset_fileC == "") dataset_fileC='data/assunzioni.json';
-	if (geo_file == '') geo_file='geo/italy_regions_lowres.json';
+	if (dataset_fileH == "") dataset_fileH='abitanti';
+	if (dataset_fileC == "") dataset_fileC='assunzioni';
+	if (geo_file == '') geo_file='geo/regioni.json';
 
         console.log("GEO: "+geo_file);
         console.log("DATAH: "+dataset_fileH);
         console.log("DATAC: "+dataset_fileC);
 
-	jQuery.getJSON(dataset_fileH, function(dataH, textStatus, jqXHR) {
+	jQuery.getJSON("data/"+dataset_fileH+".json", function(dataH, textStatus, jqXHR) {
 
 		datasetH = dataH;
 		console.log("datasetH: "+datasetH);
@@ -152,7 +159,7 @@ function draw3DStat(geoData,statDataH,statDataC) {
 		}
 		console.log("height_sum: "+height_sum);
 
-		jQuery.getJSON(dataset_fileC, function(dataC, textStatus, jqXHR) {
+		jQuery.getJSON("data/"+dataset_fileC+".json", function(dataC, textStatus, jqXHR) {
 
 			datasetC = dataC;
 			console.log("datasetC: "+datasetC);
@@ -707,6 +714,8 @@ if($('.best-worst').length > 0){
 
     var updateStats = function(){
         peso=w.getValue();
+        hwc = peso;
+		console.log("HWC: "+hwc);
         highval = Number(peso.toFixed(1));
         //console.log(highval);
 		color_weight = highval 

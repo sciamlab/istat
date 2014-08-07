@@ -252,7 +252,8 @@ header .section_icon .logo{
 }
 
 .best-worst .selector-box,
-.best-worst .slider-box{
+.best-worst .slider-box,
+.best-worst .sshare-box{
     background: #fff url('../img/pattern_select-box.png');
     padding:5px;
     -moz-border-radius: 0 20px 0 0 ;
@@ -261,7 +262,8 @@ header .section_icon .logo{
     margin-bottom: 10px;
 }
 .best-worst .selector-box .title-select,
-.best-worst .slider-box .title-slider{
+.best-worst .slider-box .title-slider,
+.best-worst .sshare-box .title-sshare{
     font-family: 'Nilland',sans-serif;
     font-weight: 900;
     margin:5px 0;
@@ -270,7 +272,8 @@ header .section_icon .logo{
     font-size: 1.2em;
 }
 .best-worst .selector-box .title-select i,
-.best-worst .slider-box .title-slider i{
+.best-worst .slider-box .title-slider i,
+.best-worst .sshare-box .title-sshare i{
     font-size: 2em;
 }
 

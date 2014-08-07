@@ -1,5 +1,14 @@
-Copyright (c) 2014, SciamLab s.r.l.
+Copyright (c) 2014, SciamLab s.r.l. 
 All rights reserved.
+
+The source code and data and creative content of this work is distributed
+using two different licenses:
+ 
+* All the design and application data is license using CC BY-SA 4.0
+  The geographic shapes and all the statistical indicators values consist
+  of a derivative work of the ISTAT data which is distributed using a
+  CC BY 3.0 Italian (http://www.istat.it/it/note-legali)
+* the source code of this work is licensed under the LGPLv3
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -11,7 +20,7 @@ modification, are permitted provided that the following conditions are met:
   this list of conditions and the following disclaimer in the documentation
   and/or other materials provided with the distribution.
 
-* Neither the name of the {organization} nor the names of its
+* Neither the name of SciamLab nor the names of its
   contributors may be used to endorse or promote products derived from
   this software without specific prior written permission.
 

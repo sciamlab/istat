@@ -21,11 +21,20 @@ Feature details
 The interactive visualization include some little goodies including:
 
 * Ability to rotate,pan and zoom using cursors or keyboard in addition to the mouse.
-* Generate PNG image directliy from the visualization canvas. This is possible using the [@eligrey/FileSaver.js](https://github.com/eligrey/FileSaver.js)
+* Generate PNG image directliy from the visualization canvas using the [FileSaver.js](https://github.com/eligrey/FileSaver.js) library.
 
+License
+--------
+The source code and data and creative content of this work is distributed
+using two different licenses:
+ 
+* All the design and application data is license using [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
+  The geographic shapes and all the statistical indicators values consist
+  of a derivative work of the ISTAT data which is distributed using a
+  CC BY 3.0 Italian as better described in the [ISTAT Licensing page](http://www.istat.it/it/note-legali)
+* the source code of this work is licensed under the LGPLv3
 
-
-
+for further information please read our [LICENSE](https://raw.githubusercontent.com/sciamlab/istat/master/LICENSE) file
 
 [#1]: http://censimentoindustriaeservizi.istat.it/ "Censimento Industria e Servizi ISTAT 2011"
 [#2]: http://www.khronos.org/webgl/wiki/Main_Page "WebGL wiki at Khronos"
