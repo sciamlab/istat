@@ -3,10 +3,7 @@
  * v0.5b
  */
 
-//TRANSLATE_0 z-axis
-//TRANSLATE_1 x-axis
-//SCALE 1:5000
-
+var DEBUG = false;
 var mouse = { x: 0, y: 0 }
 
 var appConstants  = {
@@ -28,7 +25,6 @@ var offset=$('.container2').offset();
 CANVAS_W=offset.left;
 CANVAS_H=offset.top;
 
-
 var geons = {};
 var ISTAT_PARAM = {
 		Anno: 2001
@@ -36,9 +32,9 @@ var ISTAT_PARAM = {
 
 //this file contains all the geo related objects and functions
 geons.geoConfig = function() {
-	this.TRANSLATE_0 = appConstants.TRANSLATE_0;
-	this.TRANSLATE_1 = appConstants.TRANSLATE_1;
-	this.SCALE = appConstants.SCALE;
+	this.TRANSLATE_0 = appConstants.TRANSLATE_0; //z-axis
+	this.TRANSLATE_1 = appConstants.TRANSLATE_1; //x-axis
+	this.SCALE = appConstants.SCALE; //SCALE 1:5000
 
 	this.mercator = d3.geo.mercator();
 	this.path = d3.geo.path().projection(this.mercator);
@@ -55,8 +51,6 @@ geons.geoConfig = function() {
 
 //geoConfig contains the configuration for the geo functions
 geo = new geons.geoConfig();
-
-
 
 //check if WebGL is not available 
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
@@ -87,13 +81,20 @@ var urlParams;
 		urlParams[decode(match[1])] = decode(match[2]);
 })();
 
-//check request
+//set the defaults in case no parameters are found
 var	h = (urlParams.h=="" || urlParams.h==null) ? "abitanti" : urlParams.h,
 c = (urlParams.c=="" || urlParams.c==null) ? "assunzioni" : urlParams.c,
+g = (urlParams.g=="" || urlParams.g==null) ? "regioni" : urlParams.g,
 hwc = (urlParams.hwc=="" || urlParams.hwc==null) ? "0.5" : urlParams.hwc;
-console.log("H: "+h);		
-console.log("C: "+c);
-console.log("HWC: "+hwc);
+//console.log("H: "+h);		
+//console.log("C: "+c);
+//console.log("G: "+g);
+//console.log("HWC: "+hwc);
+
+// set the proper value to the inidicatore selects
+
+$("#statchooserH").val( h );
+$("#statchooserC").val( c );
 
 
 var geojson;
@@ -122,19 +123,16 @@ function draw3DStat(geoData,statDataH,statDataC) {
 	var geo_file = geoData;
 	color_sum=0;
 	height_sum=0;    
-        
-	if (dataset_fileH == "") dataset_fileH='abitanti';
-	if (dataset_fileC == "") dataset_fileC='assunzioni';
-	if (geo_file == '') geo_file='geo/regioni.json';
 
-        console.log("GEO: "+geo_file);
-        console.log("DATAH: "+dataset_fileH);
-        console.log("DATAC: "+dataset_fileC);
+
+        //console.log("GEO: "+geo_file);
+        //console.log("DATAH: "+dataset_fileH);
+        //console.log("DATAC: "+dataset_fileC);
 
 	jQuery.getJSON("data/"+dataset_fileH+".json", function(dataH, textStatus, jqXHR) {
 
 		datasetH = dataH;
-		console.log("datasetH: "+datasetH);
+		//console.log("datasetH: "+datasetH);
 		//title = dataset.title;
 		//description = dataset.description;
 		//console.log("title: "+title);
@@ -148,21 +146,22 @@ function draw3DStat(geoData,statDataH,statDataC) {
 		height_unit = datasetH.dim_unit;
         $("#stat-dimhigh").html(height_label);
         $(".label-dim-high").html(height_label);
-		console.log("height_prop: "+height_prop);
-		console.log("height_scaling_factor: "+height_scaling_factor);
-		console.log("height_label: "+height_label);
-		console.log("height_unit: "+height_unit);
-		console.log("height_polarity: "+height_polarity);
 
 		for (var ix = 0 ; ix < datasetH.data.length ; ix++) {
 	       height_sum=height_sum+parseFloat(datasetH.data[ix][height_prop]);
 		}
-		console.log("height_sum: "+height_sum);
-
+		if (DEBUG) {
+			console.log("height_prop: "+height_prop);
+			console.log("height_scaling_factor: "+height_scaling_factor);
+			console.log("height_label: "+height_label);
+			console.log("height_unit: "+height_unit);
+			console.log("height_polarity: "+height_polarity);
+			console.log("height_sum: "+height_sum);
+		}
 		jQuery.getJSON("data/"+dataset_fileC+".json", function(dataC, textStatus, jqXHR) {
 
 			datasetC = dataC;
-			console.log("datasetC: "+datasetC);
+			//console.log("datasetC: "+datasetC);
 
 			color_prop = datasetC.dim_prop;
 			color_scaling_factor = datasetC.dim_scaling_factor;
@@ -172,19 +171,20 @@ function draw3DStat(geoData,statDataH,statDataC) {
 		    $("#stat-dimcolor").html(color_label);
 		    $(".label-dim-color").html(color_label);
 
-			console.log("color_prop: "+color_prop);
-			console.log("color_scaling_factor: "+color_scaling_factor);
-			console.log("color_label: "+color_label);
-			console.log("color_unit: "+color_unit);
-			console.log("color_polarity: "+color_polarity);
 
 			for (ix = 0 ; ix < datasetC.data.length ; ix++) {
 			   color_sum=color_sum+parseFloat(datasetC.data[ix][color_prop]);
 			}
-			console.log("color_sum: "+color_sum);
-
+			if (DEBUG) {
+				console.log("color_prop: "+color_prop);
+				console.log("color_scaling_factor: "+color_scaling_factor);
+				console.log("color_label: "+color_label);
+				console.log("color_unit: "+color_unit);
+				console.log("color_polarity: "+color_polarity);
+				console.log("color_sum: "+color_sum);
+			}
 			// get the data
-			jQuery.getJSON(geo_file, function(data, textStatus, jqXHR) {
+			jQuery.getJSON("geo/"+geo_file+".json", function(data, textStatus, jqXHR) {
 
 				geojson = data;
 				//console.log("geojson: "+geojson);
@@ -238,8 +238,8 @@ function draw3DStat(geoData,statDataH,statDataC) {
 								break;
 							}
 						}
-						console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height +' RANK: '+current_rank);
-						console.log()	
+						//DEBUG// console.log('['+regione_id+'] REGIONE: ' + geoFeature.properties.nome_regione + ' color_value: ' + current_color + ' height_value: ' + current_height +' RANK: '+current_rank);
+						//console.log()	
 						var mesh = transformSVGPathExposed(feature);
 						// add to array
 						meshes.push(mesh);
@@ -273,16 +273,17 @@ function draw3DStat(geoData,statDataH,statDataC) {
 
 		            //console.log("ORDINATO");
 		            //console.log(regionsort);
+/*
 		            $("#region-b1").html(regionsort[0]['nome_regione']);
 		            $("#region-b2").html(regionsort[1]['nome_regione']);
 		            $("#region-b3").html(regionsort[2]['nome_regione']);
 		            $("#region-w3").html(regionsort[17]['nome_regione']);
 		            $("#region-w2").html(regionsort[18]['nome_regione']);
 		            $("#region-w1").html(regionsort[19]['nome_regione']);
-
-		            console.log(averageValues);
-		            console.log(minValueAverage);
-		            console.log(maxValueAverage);
+*/
+		            //console.log(averageValues);
+		            //console.log(minValueAverage);
+		            //console.log(maxValueAverage);
 					// we've got our paths now extrude them to a height and add a color
 					for (var i = 0 ; i < averageValues.length ; i++) {
 
@@ -324,6 +325,7 @@ function draw3DStat(geoData,statDataH,statDataC) {
 					}
 					regions.castShadow = true;
 					scene.add(regions);
+					updateStats(hwc);
 				}
 
 				// simple gradient function
@@ -432,12 +434,6 @@ function draw3DStat(geoData,statDataH,statDataC) {
 			}); // end loading/rendering geodata
 		}); // end loading color dimension
 	}); //end loading high dimension
-
-        /*//var obj, i;
-        for ( var i = 0; i< scene.children.length ; i++ ) {
-          obj = scene.children[ i ];
-             console.log("### GOING TO REMOVE: [id:" + obj.id+"],[name:"+obj.name+"]");
-        }*/
 } // end draw3DStat
 
 var CAMERA_X;
@@ -478,15 +474,6 @@ function initGUI() {
 	var onFrame = window.requestAnimationFrame;
 	this.projector = new THREE.Projector();
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-
-	/*function onDocumentMouseMove( event ) {
-		event.preventDefault();
-        var headerH=$('header').height();
-        var footerH=$('footer').height();
-		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		mouse.y = - ( (event.clientY-headerH) / (window.innerHeight-headerH) ) * 2 + 1;
-		console.log('X:'+mouse.x+' Y:'+mouse.y);
-	}*/
 
 	/*
 	 * the tick() function is called for every frame
@@ -705,52 +692,95 @@ function initScene() {
 if($('.best-worst').length > 0){
     var w;
     $(window).on('load', function () {
-        $('.selectpicker').selectpicker();
-        w = $('#slider-high').slider()
-            .on('slide', updateStats)
-            .data('slider');
+		$('.selectpicker').selectpicker();
+		//$('#statchooserH').selectpicker('val', h);//.refresh;
+		//$('#statchooserC').selectpicker('val', c);//.refresh;
 
+        $('#slider-high').slider('setValue',hwc)
+            .on('slide', function(ev) {
+				//console.log("slider event:"+ev.toSource());
+				updateStats(Number( ev.value.toFixed(1) ));
+			});
     });
-
-    var updateStats = function(){
-        peso=w.getValue();
-        hwc = peso;
-		console.log("HWC: "+hwc);
-        highval = Number(peso.toFixed(1));
-        //console.log(highval);
-		color_weight = highval 
-        height_weight = Number((1-highval).toFixed(1));
-        document.getElementById('val-dim-high').innerHTML = height_weight;
-        document.getElementById('val-dim-color').innerHTML = color_weight;
-
-        for (var x = 0 ; x < regionsort.length ; x++) {
-            current_color = datasetC.data[x][color_prop];
-            current_height = datasetH.data[x][height_prop];
-		    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
-            normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
-            //console.log("Normalized color indicator: "+normalized_color); 
-            //console.log("Normalized height indicator: "+normalized_height); 
-            datasetH.data[x].rank=parseInt( (normalized_color+normalized_height) *100 );
-            //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
-			current_rank = datasetH.data[x].rank;
- 	        //console.log("REG/HEIGH/COLOR/RANK: "+ dataset.data[x].nome_regione+"/"+current_height+"/"+current_color+"/"+current_rank); 
-        }
-
-		var neutralDataset = jQuery.extend(true, {}, datasetH);
-        regionsort = neutralDataset.data.sort(function(a,b) {
-            if (a.rank > b.rank)
-                return -1;
-            if (a.rank < b.rank)
-                return 1;
-            return 0;
-        });
-
-        $("#region-b1").html(regionsort[0]['nome_regione']);
-        $("#region-b2").html(regionsort[1]['nome_regione']);
-        $("#region-b3").html(regionsort[2]['nome_regione']);
-        $("#region-w3").html(regionsort[17]['nome_regione']);
-        $("#region-w2").html(regionsort[18]['nome_regione']);
-        $("#region-w1").html(regionsort[19]['nome_regione']);
-    }
 }
 
+function updateStats(newVal){
+	hwc = newVal; 
+	color_weight = hwc; 
+    height_weight = Number((1-hwc).toFixed(1));
+    document.getElementById('val-dim-high').innerHTML = height_weight;
+    document.getElementById('val-dim-color').innerHTML = color_weight;
+
+    for (var x = 0 ; x < regionsort.length ; x++) {
+        current_color = datasetC.data[x][color_prop];
+        current_height = datasetH.data[x][height_prop];
+	    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
+        normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
+        //console.log("Normalized color indicator: "+normalized_color); 
+        //console.log("Normalized height indicator: "+normalized_height); 
+        datasetH.data[x].rank=parseInt( (normalized_color+normalized_height) *100 );
+        //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
+		current_rank = datasetH.data[x].rank;
+        //console.log("REG/HEIGH/COLOR/RANK: "+ dataset.data[x].nome_regione+"/"+current_height+"/"+current_color+"/"+current_rank); 
+    }
+
+	var neutralDataset = jQuery.extend(true, {}, datasetH);
+    regionsort = neutralDataset.data.sort(function(a,b) {
+        if (a.rank > b.rank)
+            return -1;
+        if (a.rank < b.rank)
+            return 1;
+        return 0;
+    });
+
+    $("#region-b1").html(regionsort[0]['nome_regione']);
+    $("#region-b2").html(regionsort[1]['nome_regione']);
+    $("#region-b3").html(regionsort[2]['nome_regione']);
+    $("#region-w3").html(regionsort[17]['nome_regione']);
+    $("#region-w2").html(regionsort[18]['nome_regione']);
+    $("#region-w1").html(regionsort[19]['nome_regione']);
+
+	updateShareText();
+}
+
+function chooseStat(actionFrom) {
+    // check in the same value is selected on both the combos
+    var selStatH = document.getElementById("statchooserH");
+    var selStatC = document.getElementById("statchooserC");
+    var statFileH = selStatH.options[selStatH.selectedIndex].value;
+    var statFileC = selStatC.options[selStatC.selectedIndex].value;
+
+	if (statFileH==statFileC) {
+		console.log("turn error on: "+actionFrom.id);
+		$("button[data-id="+actionFrom.id+"]")
+            .addClass("btn-danger");
+		return false;			
+	} else {
+		$(".btn-danger")
+            .removeClass("btn-danger");
+		h=statFileH;
+		c=statFileC;
+        draw3DStat("regioni",h,c);
+		updateShareText();
+		return true;
+	}	
+} //end chooseStat(actionFrom)
+
+function updateShareText() {
+
+    var selStatH = document.getElementById("statchooserH");
+    var selStatC = document.getElementById("statchooserC");
+	
+	refURL = encodeURIComponent(location.protocol + '//' + location.host + location.pathname +"?h="+h+"&c="+c+"&hwc="+hwc+"&g="+g);
+	//console.log("refURL: "+refURL);
+	refText = encodeURIComponent( "#ildatotratto "+selStatH.options[selStatH.selectedIndex].text+" e "+selStatC.options[selStatC.selectedIndex].text+" #istat #datachallenge");
+
+	//update twitter
+	twurl = "https://twitter.com/intent/tweet?tw_p=tweetbutton&url="+refURL+"&text=" + refText;
+	$("#twbutton").attr("href",twurl);
+
+	//update google+
+ 
+	//update facebook
+
+}
