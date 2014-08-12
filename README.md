@@ -30,13 +30,13 @@ Datasets, based on the ISTAT datawarehouse are served directly from the web serv
   * a small footprint [bootstrap slider](http://www.eyecon.ro/bootstrap-slider/)
   * the latest version of the [Mike Bostock](http://bost.ocks.org/mike/) awesome [D3.js Data Driven Documents v3.4.11](http://d3js.org/) library
   * for 3D WebGL javascript manipulation the latest [three.js r68](http://threejs.org/)
-  * a revised d3.js to three.js bridging library to project GeoJSON geometries and projections into a WebGL coordinates system based on [d3-threeD.js](https://github.com/asutherland/d3-threeD) work. 
+  * a revised d3.js to three.js bridging library to project GeoJSON geometries into a WebGL coordinates system based on [d3-threeD.js](https://github.com/asutherland/d3-threeD) work. 
 
 The interactive visualization include some little goodies including:
 
-* Is completelly responsive and support either desktop, tablet and mobile devices common display size.
-* Ability to rotate,pan and zoom using cursors or keyboard in addition to the mouse.
-* Generate PNG image directliy from the visualization canvas using the [FileSaver.js](https://github.com/eligrey/FileSaver.js) library.
+* responsive capabilities and support for common desktop, tablet and mobile devices display size.
+* Ability to rotate,pan and zoom with mouse/keyboard.
+* Generate PNG image directliy from the visualization canvas using the [FileSaver.js](https://github.com/eligrey/FileSaver.js) library just pressing the "p" key.
 
 
 License

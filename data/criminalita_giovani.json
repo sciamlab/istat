@@ -1,6 +1,7 @@
 {
 	"dim_prop":"TassoCriminalita",
-    "dim_label":"Tasso criminalit&agrave; giovanile",
+    "dim_label_it":"Tasso criminalit&agrave; giovanile",
+    "dim_label_en":"Youth crime rate",
     "dim_unit": "",
     "dim_scaling_factor": 1,
     "dim_polarity": -1,

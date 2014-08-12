@@ -1,0 +1,11 @@
+{
+    "datasets":[
+		{ "dataset_file": "abitanti", "label_it": "Abitanti","label_en":"Population" },
+		{ "dataset_file": "imprese", "label_it": "Quantit&agrave; Imprese","label_en":"Nr. of companies" },
+		{ "dataset_file": "assunzioni", "label_it": "Propensione Assunzione","label_en":"Propensity to hire" },
+		{ "dataset_file": "istruz_giovani", "label_it": "Livello Istruzione 15-19 anni","label_en":"Education level 15-19 years" },
+		{ "dataset_file": "criminalita_giovani", "label_it": "Tasso criminalit&agrave; giovanile","label_en":"Youth crime rate" },
+		{ "dataset_file": "suicidi", "label_it": "Tasso Suicidi","label_en":"Suicide rate" },
+		{ "dataset_file": "tumori", "label_it": "Tasso mortalit&agrave; tumori","label_en":"Cancer mortality rate per 100,000 population" },
+    ]
+}

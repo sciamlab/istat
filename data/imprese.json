@@ -1,6 +1,7 @@
 {
 	"dim_prop":"NrImprese",
-    "dim_label":"Quantit&agrave Imprese",
+    "dim_label_it":"Quantit&agrave Imprese",
+    "dim_label_en":"Nr. of companies",
     "dim_unit": "",
     "dim_scaling_factor": 1,
     "dim_polarity": 1,

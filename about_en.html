@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="#ildatotratto visualizzazione indicatori regionali 3D #istat #datachallenge">
+	<meta name="keywords" content="istat, data, challenge, webgl, 3d, choropleth, indicatori, statistica">
+    <meta name="author" content="Alessio Dragoni (ad@sciamlab.com)">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>About #ildatotratto 3D statistical indicators visualization #istat #datachallenge</title>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="best-worst" style="font-size: 16px;">
+    <div id="wrap">
+          <header>
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-sm-10 col-xs-9" >
+                          <a href="index.html?l=en"><img class="img-responsive" src="img/ildatoetratto.png" alt="il dato è tratto"></a>
+                      </div>
+                      <div class="col-sm-2 col-xs-3">
+                          <a href="http://www.istat.it"><img class="img-responsive" src="img/istat_logo_home.png" alt="istat"/></a>
+                      </div>
+                  </div>
+              </div>
+          </header>
+        <main>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="about">
+                           <p>
+                               The working group “<b>Il dato è tratto</b>” was born from among communication professionals (designers, journalists) and experienced
+							   data and sotware engineers.<br/><br/>
+                               The group is made of:
+                           </p>
+                           <ul>
+                               <li itemscope itemtype="http://data-vocabulary.org/Person"><a href="mailto:biondo@cappellidesign.com" itemprop="url"><span itemprop="name">Tommaso Biondo</span></a>, <em>web developer</em> – Cappelli Identity Design srl</li>
+                               <li itemscope itemtype="http://data-vocabulary.org/Person"><a href="mailto:cappelli@cappellidesign.com" itemprop="url"><span itemprop="name">Emanuele G. Cappelli</span></a>, <em>brand designer</em> – Cappelli Identity Design srl</li>
+                               <li itemscope itemtype="http://data-vocabulary.org/Person"><a href="mailto:g.castellotti@tiscali.it" itemprop="url"><span itemprop="name">Giampiero Castellotti</span></a>, <em>professional journalist</em></li>
+                               <li itemscope itemtype="http://data-vocabulary.org/Person"><a href="http://plus.google.com/+AlessioDragoni" itemprop="url"><span itemprop="name">Alessio Dragoni</span></a>, <em>software engineer</em> – Sciamlab srl</li>
+                               <li itemscope itemtype="http://data-vocabulary.org/Person"><a href="mailto:grafica@sectio.it" itemprop="url"><span itemprop="name">Enrico Parisio</span></a>, <em>graphic designer</em> – Sectio sas</li>
+                               <li itemscope itemtype="http://data-vocabulary.org/Person"><a href="http://twitter.com/pastarace" itemprop="url"><span itemprop="name">Paolo Starace</span></a>, <em>data scientist</em> – Sciamlab srl</li>
+                           </ul>
+                            <p>
+                                This combination is the result of a joint evaluation, enriched by knowledge related to various professional fields: on one side, the broad field of visual design;
+								and in the other, that of open data.<br/><br/>
+                                The visualization of complex data - and then return to the citizens of useful information in an understandable form - is at the center of this reflection.
+								To operate in this "new" area of ​​expertise is needed hybridization of competences and skills.<br/><br/>
+
+                                The team was questioned mainly on the concept of "visible form". In particular, he focused on the passage that leads to an aesthetic of form due to
+								the classical idea (stable, defined, closed) towards an aesthetic of flows, in which the forms are galvanizing and change over time, affecting volumes
+								now calculated petabytes, on the multiplicity of data / information from the value maximized and the speed of administration and uptake by the user.
+								The result is the representation of the "passages of information" that alter the contours of stable signifiers.<br/><br/>
+
+                                It is from this premise that designers, journalists, developers have begun to operate in an effort to provide the public with new communications
+								tools dynamic, sophisticated, interactive, that are not within the exclusive prerogative of computer technicians both in conception and in use,
+								nor that favor less formal coherence to the detriment of the information itself. Instead, they are designed User Experience thinking of the end
+								user, so with a design-oriented approach.<br/><br/>
+
+                                
+								Goal of the work is therefore to enable the public to interact with the complexity of the information; the user is not understood, therefore,
+								as a passive receiver of input, but as a subject that can, in turn, to develop strategies to query the data for their own use and consumption.<br/><br/>
+								
+								If the modern aesthetic locates in rational form that element of union and decoding of the <i>"res cogitans and res extensa"</i>, 
+								if industrial society questions on the infinite reproducibility of the shape / object, contemporary aesthetics crosses borders and
+								stable set of the form , proposing it as a hybrid of the action "constructivist" user and the data streams that he himself is able to query, if enabled.<br/><br/>
+
+								The results of these types of experiences, rapidly advancing globally, affect significantly the evolution of both social and industrial sectors.<br/><br/>
+                            </p>
+                            <h3>The Istat contest</h3>
+                            <p>
+                                The working group “<b>Il dato è tratto</b>” has designed an application divided into two parts:
+                            </p>
+                            <ol>
+                                <li><b>Best/worst</b></li>
+                                <li><b>The best place</b></li>
+                            </ol>
+                            <img src="img/screen-home.jpg" alt="datotratto home" class="img-responsive"/>
+                            <p>
+                                In the section <b>Best/worst</b> we propose a dynamic view of Italian regions and provinces that change shape and color
+								scheme depending on the intersection of the selected dataset.<br/><br/>
+
+                                The user can choose, for example, to cross the given population in a given area with the given propensity recruitment
+								in the same territory and have, through an immediate glance, the picture of the situation.<br/><br/>
+
+                                So those who use the service can form an idea, not ruling, but backed up by real data and science.<br/><br/>
+
+                                You can also modify the data according to the greater or lesser interest to be granted to individual indicators, in the
+								"What is more important": it is a weighted average of the two indicators generalized polar and to compare the data
+								with respect to the needs of 'user.<br/><br/>
+
+                                Interaction with the application, the public is able to form some general ideas on the concept of development in our
+								country, its excellence, its contradictions, its shadows.
+                            </p>
+                            <img src="img/screen-best-worst.jpg" alt="best/worst" class="img-responsive"/>
+                            <p>
+                                In the section <b>The best place</b> the user is asked to express his desired in terms of employment and occupation.
+								He is then asked to make choices, always personal, which deal with the themes of culture and the environment: the data
+								crossed the return the territory closer to its desired location ie the "cozier" than required.<br/><br/>
+
+                                The data in this context loses its value merely quantitative and impersonal, vice versa is used for reconfiguration serving the needs of the user.
+                            </p>
+							<img src="img/screen-best-place.jpg" alt="best/place" class="img-responsive"/>
+                            <p>
+                                These are just examples that invite us to reflect on the potential that this type of approach to visual / interactive
+								media can generate as widespread, that is open and service.<br/><br/>
+
+                                The citizen is not merely the passive recipient of the communication (both commercial and institutional), but is able to "produce information.".<br/><br/>
+
+                                AIn this sense the "shape-law" is no longer static, enclosed in the grammatical and syntactic structure of legal codes, 
+								or in its actualization entrusted to the heterogeneity of trading territorial policies, but is subject to the control 
+								and to the extent that they are objective of all democratic systems. The process of nucleation of a particular law and 
+								its exercise are thus traced to a unique extent that its true scope, effectiveness and functionality.<br/><br/>
+
+                                The hybrid competences of the team - journalism, graphic design, communication and software - find their osmosis
+								mainly in the spirit of "service" of the common work.
+                            </p>
+                            <p class="signature text-center">
+                                <br/><br/>
+                                <b>(Il dato è tratto - Nota iacta est)</b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </main>
+    </div>
+    <!-- end #wrap -->
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-5">
+                    <a href="http://github.com/sciamlab/istat" target="_blank" class="github-link"><i class="fa fa-github fa-3x"></i></a>
+                    <div class="footer-info">
+                        <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licenza Creative Commons" src="img/80x15.png" /></a>
+                        <span style="font-size:8pt;">&copy; 2014 <a href="about_en.html" alt="About">Il Dato &egrave; Tratto</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- legend tooltip on WebGL elements -->
+    <div id="dhtmltooltip"></div>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="js/ga.js"></script>
+</body>
+</html>
+

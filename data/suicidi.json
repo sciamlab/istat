@@ -1,6 +1,7 @@
 {
 	"dim_prop":"TassoSuicidi",
-    "dim_label":"Tasso Suicidi",
+    "dim_label_it":"Tasso Suicidi",
+    "dim_label_en":"Suicide rate",
     "dim_unit": "",
     "dim_scaling_factor": 1,
     "dim_polarity": -1,

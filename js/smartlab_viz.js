@@ -70,6 +70,28 @@ var keyboard = new THREEx.KeyboardState();
 var regions = new THREE.Object3D();
 regions.name = 'regions';
 var rotSpeed = .02;
+var datasets = [
+		{ "dataset_file": "abitanti", "label_it": "Abitanti","label_en":"Population" },
+		{ "dataset_file": "imprese", "label_it": "Quantit\u00E0 Imprese","label_en":"Nr. of companies" },
+		{ "dataset_file": "assunzioni", "label_it": "Propensione Assunzione","label_en":"Propensity to hire" },
+		{ "dataset_file": "istruz_giovani", "label_it": "Livello Istruzione 15-19 anni","label_en":"Education level 15-19 years" },
+		{ "dataset_file": "criminalita_giovani", "label_it": "Tasso criminalit\u00E0 giovanile","label_en":"Youth crime rate" },
+		{ "dataset_file": "suicidi", "label_it": "Tasso Suicidi","label_en":"Suicide rate" },
+		{ "dataset_file": "tumori", "label_it": "Tasso mortalit\u00E0 tumori","label_en":"Cancer mortality rate per 100,000 population" }
+    ];
+
+var labels = {
+	"lbl_titleselect_it":"Cosa ti interessa vedere?",
+	"lbl_titleselect_en":"What you want compare?",
+	"lbl_titleslider_it":"Cosa \u00E8 pi\u00F9 importante?",
+	"lbl_titleslider_en":"What is more relevant?",
+	"lbl_titleshare_it":"Condividi!",
+	"lbl_titleshare_en":"Share!",
+	"lbl_title_it":"#ildatotratto visualizzazione indicatori regionali 3D #istat #datachallenge",
+	"lbl_title_en":"#ildatotratto 3D regional statistical indicators visualization #istat #datachallenge",
+	"lbl_head_it":"regioni/<span class='gray'>imprese</span>/indicatori",
+	"lbl_head_en":"regions/<span class='gray'>corporates</span>/indicators"
+};
 
 var urlParams;
 (window.onpopstate = function () {
@@ -88,17 +110,26 @@ var urlParams;
 var	h = (urlParams.h=="" || urlParams.h==null) ? "abitanti" : urlParams.h,
 c = (urlParams.c=="" || urlParams.c==null) ? "assunzioni" : urlParams.c,
 g = (urlParams.g=="" || urlParams.g==null) ? "regioni" : urlParams.g,
-hwc = (urlParams.hwc=="" || urlParams.hwc==null) ? "0.5" : urlParams.hwc;
-//console.log("H: "+h);		
-//console.log("C: "+c);
-//console.log("G: "+g);
-//console.log("HWC: "+hwc);
+hwc = (urlParams.hwc=="" || urlParams.hwc==null) ? "0.5" : urlParams.hwc,
+l = (urlParams.l=="" || urlParams.l==null) ? "it" : urlParams.l;
+
 
 // set the proper value to the inidicatore selects
+
+for(var dsc = 0; dsc < datasets.length; dsc++) {
+	$("#statchooserH").append( new Option( datasets[dsc]["label_"+l], datasets[dsc].dataset_file ) );
+	$("#statchooserC").append( new Option( datasets[dsc]["label_"+l], datasets[dsc].dataset_file ) );
+}
 
 $("#statchooserH").val( h );
 $("#statchooserC").val( c );
 
+document.title = labels["lbl_title_"+l];
+$("#titleselect").text(labels["lbl_titleselect_"+l]);
+$("#titleslider").text(labels["lbl_titleslider_"+l]);
+$("#titleshare").text(labels["lbl_titleshare_"+l]);
+$("#subtitle").html(labels["lbl_head_"+l]);
+$("#aboutlink").attr("href","about_"+l+".html");
 
 var geojson;
 var dataset;
@@ -107,7 +138,7 @@ var color_prop;
 var height_prop;
 var color_scaling_factor;
 var height_scaling_factor;
-var color_label;
+var color_	;
 var height_label;
 var color_unit;
 var height_unit;
@@ -144,7 +175,7 @@ function draw3DStat(geoData,statDataH,statDataC) {
 
 		height_prop = datasetH.dim_prop;
 		height_scaling_factor = datasetH.dim_scaling_factor;
-		height_label = datasetH.dim_label;
+		height_label = datasetH["dim_label_"+l];
         height_polarity = parseInt(datasetH.dim_polarity);
 		height_unit = datasetH.dim_unit;
         $("#stat-dimhigh").html(height_label);
@@ -168,7 +199,7 @@ function draw3DStat(geoData,statDataH,statDataC) {
 
 			color_prop = datasetC.dim_prop;
 			color_scaling_factor = datasetC.dim_scaling_factor;
-			color_label = datasetC.dim_label;
+			color_label = datasetC["dim_label_"+l];
 		    color_polarity = parseInt(datasetC.dim_polarity);
 			color_unit = datasetC.dim_unit;
 		    $("#stat-dimcolor").html(color_label);
@@ -536,7 +567,7 @@ function initGUI() {
 		} 
 		if(this.INTERSECTED) {
 						
-                        ddrivetip('<p><h4 style="font-family:Nilland,sans-serif;font-weight:900;">'+this.hover_name+'</h4>'+this.height_label+': '+this.hover_height+this.height_unit+'<br />'+this.color_label+': '+this.hover_color+this.color_unit+'<br />RANK:'+this.hover_rank+'</p>','rgba(231,231,231,0.8)', 300);
+                        ddrivetip('<p><h4 style="font-family:Nilland,sans-serif;font-weight:900;">'+this.hover_name+'</h4>'+height_label+': '+this.hover_height+this.height_unit+'<br />'+color_label+': '+this.hover_color+this.color_unit+'<br />RANK:'+this.hover_rank+'</p>','rgba(231,231,231,0.8)', 300);
 		} else {
 			hideddrivetip();
 		}
@@ -776,7 +807,7 @@ function updateShareText() {
 	
 	refURL = encodeURIComponent(location.protocol + '//' + location.host + location.pathname +"?h="+h+"&c="+c+"&hwc="+hwc+"&g="+g);
 	//console.log("refURL: "+refURL);
-	refText = encodeURIComponent( "#ildatotratto "+selStatH.options[selStatH.selectedIndex].text+" e "+selStatC.options[selStatC.selectedIndex].text+" #istat #datachallenge");
+	refText = encodeURIComponent( "#ildatotratto "+selStatH.options[selStatH.selectedIndex].text+" & "+selStatC.options[selStatC.selectedIndex].text+" #istat #datachallenge");
 
 	//update twitter
 	twurl = "https://twitter.com/intent/tweet?tw_p=tweetbutton&url="+refURL+"&text=" + refText;

@@ -1,6 +1,7 @@
 {
 	"dim_prop":"PropensioneAssumere",
-    "dim_label":"Propensione ad assumere",
+    "dim_label_it":"Propensione ad assumere",
+    "dim_label_en":"Propensity to hire",
     "dim_unit": "%",
     "dim_scaling_factor": 1,
     "dim_polarity": 1,

@@ -1,6 +1,7 @@
 {
 	"dim_prop":"TassoTumori",
-    "dim_label":"Tasso Mortalit&agrave Tumori per 100000 abitanti",
+    "dim_label_it":"Tasso Mortalit&agrave Tumori per 100000 abitanti",
+    "dim_label_en":"Cancer mortality rate per 100,000 population",
     "dim_unit": "",
     "dim_scaling_factor": 1,
     "dim_polarity": -1,
