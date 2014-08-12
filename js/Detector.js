@@ -21,17 +21,25 @@ var Detector = {
 		element.style.background = '#fff';
 		element.style.color = '#000';
 		element.style.padding = '1.5em';
-		element.style.width = '400px';
+		element.style.width = '450px';
 		element.style.margin = '5em auto 0';
 
 		if ( ! this.webgl ) {
 
 			element.innerHTML = window.WebGLRenderingContext ? [
-				'Your graphics card does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
-				'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
+				'Your graphics card or your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
+				'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a><br />.',
+				'You can also try with browsers like <a href="http://www.mozilla.org/firefox" style="color:#000">Firefox</a> or <a href="https://www.google.com/chrome/browser/" style="color:#000">Chrome</a> ! <br /><br />',
+				'La tua scheda grafica non sembra supporti <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
+				'Controlla esattamente come supportarla <a href="http://get.webgl.org/" style="color:#000">qui</a>.<br />',
+				'Puoi anche provari con altri browser come <a href="http://www.mozilla.org/firefox" style="color:#000">Firefox</a> oppure <a href="https://www.google.com/chrome/browser/" style="color:#000">Chrome</a> ! <br /><br />'
 			].join( '\n' ) : [
-				'Your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br/>',
-				'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
+				'Your graphics card or your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
+				'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a><br />.',
+				'You can also try with browsers like <a href="http://www.mozilla.org/firefox" style="color:#000">Firefox</a> or <a href="https://www.google.com/chrome/browser/" style="color:#000">Chrome</a> ! <br /><br />',
+				'La tua scheda grafica non sembra supporti <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
+				'Controlla esattamente come supportarla <a href="http://get.webgl.org/" style="color:#000">qui</a>.<br />',
+				'Puoi anche provari con altri browser come <a href="http://www.mozilla.org/firefox" style="color:#000">Firefox</a> oppure <a href="https://www.google.com/chrome/browser/" style="color:#000">Chrome</a> ! <br /><br />'
 			].join( '\n' );
 
 		}
@@ -46,7 +54,7 @@ var Detector = {
 
 		parameters = parameters || {};
 
-		parent = parameters.parent !== undefined ? parameters.parent : document.body;
+		parent = parameters.parent !== undefined ? parameters.parent : document.getElementById('3dcontainer');
 		id = parameters.id !== undefined ? parameters.id : 'oldie';
 
 		element = Detector.getWebGLErrorMessage();

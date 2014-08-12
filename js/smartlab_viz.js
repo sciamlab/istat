@@ -53,6 +53,9 @@ geons.geoConfig = function() {
 geo = new geons.geoConfig();
 
 //check if WebGL is not available 
+
+var cont = document.getElementById("3dcontainer");
+
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 //get the correct geo for d3s
