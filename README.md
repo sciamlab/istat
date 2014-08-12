@@ -30,8 +30,7 @@ Datasets, based on the ISTAT datawarehouse are served directly from the web serv
   * a small footprint [bootstrap slider](http://www.eyecon.ro/bootstrap-slider/)
   * the latest version of the [Mike Bostock](http://bost.ocks.org/mike/) awesome [D3.js Data Driven Documents v3.4.11](http://d3js.org/) library
   * for 3D WebGL javascript manipulation the latest [three.js r68](http://threejs.org/)
-  * a revised d3.js to three.js bridging library to project GeoJSON geometries and projections into a WebGL coordinates system based on [d3-threeD.js](https://github.com/asutherland/d3-threeD) work.
-  * 
+  * a revised d3.js to three.js bridging library to project GeoJSON geometries and projections into a WebGL coordinates system based on [d3-threeD.js](https://github.com/asutherland/d3-threeD) work. 
 
 The interactive visualization include some little goodies including:
 
