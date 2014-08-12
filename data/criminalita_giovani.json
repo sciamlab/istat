@@ -1,0 +1,29 @@
+{
+	"dim_prop":"TassoCriminalita",
+    "dim_label":"Tasso criminalit&agrave; giovanile",
+    "dim_unit": "",
+    "dim_scaling_factor": 1,
+    "dim_polarity": -1,
+    "data":[
+		{ "id_regione": "13", "TassoCriminalita": 1.3 },
+        { "id_regione": "17", "TassoCriminalita": 1.0 },
+        { "id_regione": "18", "TassoCriminalita": 1.1 },
+        { "id_regione": "15", "TassoCriminalita": 0.8 },
+        { "id_regione": "08", "TassoCriminalita": 1.8 },
+        { "id_regione": "06", "TassoCriminalita": 1.7 },
+        { "id_regione": "12", "TassoCriminalita": 1.4 },
+        { "id_regione": "07", "TassoCriminalita": 2.4 },
+        { "id_regione": "03", "TassoCriminalita": 1.3 },
+        { "id_regione": "11", "TassoCriminalita": 1.5 },
+        { "id_regione": "14", "TassoCriminalita": 1.0 },
+        { "id_regione": "01", "TassoCriminalita": 2.1 },
+        { "id_regione": "16", "TassoCriminalita": 1.0 },
+        { "id_regione": "20", "TassoCriminalita": 1.6 },
+        { "id_regione": "19", "TassoCriminalita": 1.6 },
+        { "id_regione": "09", "TassoCriminalita": 2.1 },
+        { "id_regione": "04", "TassoCriminalita": 2.1 },
+        { "id_regione": "10", "TassoCriminalita": 1.3 },
+        { "id_regione": "02", "TassoCriminalita": 1.2 },
+        { "id_regione": "05", "TassoCriminalita": 1.4 }
+    ]
+}

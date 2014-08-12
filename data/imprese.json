@@ -1,0 +1,29 @@
+{
+	"dim_prop":"NrImprese",
+    "dim_label":"Quantit&agrave Imprese",
+    "dim_unit": "",
+    "dim_scaling_factor": 1,
+    "dim_polarity": 1,
+    "data":[
+		{ "id_regione": "13", "NrImprese": 100784 },
+        { "id_regione": "17", "NrImprese": 35101  },
+        { "id_regione": "18", "NrImprese": 109987 },
+        { "id_regione": "15", "NrImprese": 337775 },
+        { "id_regione": "08", "NrImprese": 370259 },
+        { "id_regione": "06", "NrImprese": 86773 },
+        { "id_regione": "12", "NrImprese": 425730 },
+        { "id_regione": "07", "NrImprese": 128664 },
+        { "id_regione": "03", "NrImprese": 811666 },
+        { "id_regione": "11", "NrImprese": 131386 },
+        { "id_regione": "14", "NrImprese": 21420  },
+        { "id_regione": "01", "NrImprese": 336338 },
+        { "id_regione": "16", "NrImprese": 252203 },
+        { "id_regione": "20", "NrImprese": 107581 },
+        { "id_regione": "19", "NrImprese": 271714 },
+        { "id_regione": "09", "NrImprese": 330917 },
+        { "id_regione": "04", "NrImprese": 83319 },
+        { "id_regione": "10", "NrImprese": 69332  },
+        { "id_regione": "02", "NrImprese": 11832  },
+        { "id_regione": "05", "NrImprese": 403169 }
+    ]
+}

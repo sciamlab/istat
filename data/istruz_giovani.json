@@ -1,0 +1,29 @@
+{
+	"dim_prop":"LivelloIstruzione",
+    "dim_label":"Livello Istruzione 15-19 anni",
+    "dim_unit": "",
+    "dim_scaling_factor": 1,
+    "dim_polarity": 1,
+    "data":[
+		{ "id_regione": "13", "LivelloIstruzione": 98.5 },
+        { "id_regione": "17", "LivelloIstruzione": 99.6 },
+        { "id_regione": "18", "LivelloIstruzione": 97.7 },
+        { "id_regione": "15", "LivelloIstruzione": 97.8 },
+        { "id_regione": "08", "LivelloIstruzione": 98.9 },
+        { "id_regione": "06", "LivelloIstruzione": 98.9 },
+        { "id_regione": "12", "LivelloIstruzione": 98.7 },
+        { "id_regione": "07", "LivelloIstruzione": 98.9 },
+        { "id_regione": "03", "LivelloIstruzione": 98.4 },
+        { "id_regione": "11", "LivelloIstruzione": 98.1 },
+        { "id_regione": "14", "LivelloIstruzione": 97.9 },
+        { "id_regione": "01", "LivelloIstruzione": 99.0 },
+        { "id_regione": "16", "LivelloIstruzione": 98.7 },
+        { "id_regione": "20", "LivelloIstruzione": 97.7 },
+        { "id_regione": "19", "LivelloIstruzione": 97.3 },
+        { "id_regione": "09", "LivelloIstruzione": 97.7 },
+        { "id_regione": "04", "LivelloIstruzione": 98.5 },
+        { "id_regione": "10", "LivelloIstruzione": 98.3 },
+        { "id_regione": "02", "LivelloIstruzione": 97.2 },
+        { "id_regione": "05", "LivelloIstruzione": 98.3 }
+    ]
+}
