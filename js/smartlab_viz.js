@@ -114,22 +114,23 @@ hwc = (urlParams.hwc=="" || urlParams.hwc==null) ? "0.5" : urlParams.hwc,
 l = (urlParams.l=="" || urlParams.l==null) ? "it" : urlParams.l;
 
 
-// set the proper value to the inidicatore selects
-
 for(var dsc = 0; dsc < datasets.length; dsc++) {
 	$("#statchooserH").append( new Option( datasets[dsc]["label_"+l], datasets[dsc].dataset_file ) );
 	$("#statchooserC").append( new Option( datasets[dsc]["label_"+l], datasets[dsc].dataset_file ) );
 }
-
-$("#statchooserH").val( h );
-$("#statchooserC").val( c );
-
 document.title = labels["lbl_title_"+l];
 $("#titleselect").text(labels["lbl_titleselect_"+l]);
 $("#titleslider").text(labels["lbl_titleslider_"+l]);
 $("#titleshare").text(labels["lbl_titleshare_"+l]);
 $("#subtitle").html(labels["lbl_head_"+l]);
 $("#aboutlink").attr("href","about_"+l+".html");
+
+// set the proper value to the inidicatore selects
+$("#statchooserH").val( h );
+$("#statchooserC").val( c );
+
+// set the proper value for the language selector
+$("#picklang").val( l );
 
 var geojson;
 var dataset;
@@ -328,10 +329,11 @@ function draw3DStat(geoData,statDataH,statDataC) {
 						var mathColor = jsgradient.generateGradient('#F02B07','#0476F0',averageValues[i],minValueAverage,maxValueAverage); // gradient5(averageValues[i]);gradient5(averageValues[i]); // gradient(Math.round(scale),50);
 
 						var material = new THREE.MeshLambertMaterial({
-							color: mathColor,
-							//ambient: mathColor,
+							color: mathColor
+							//ambient: mathColor
 							//emissive: mathColor
 						});
+
 
 						// create extrude based on total
 						var extrude = (((totalValues[i] - minValueTotal) / (maxValueTotal - minValueTotal)) * 100 )+50;
@@ -639,17 +641,6 @@ function initScene() {
 
 
 	var strDataURI = renderer.domElement.toDataURL();
-
-	// add a light at a specific position
-	/*var pointLight = new THREE.PointLight(0xFFFFFF ,0);
-    pointLight.castShadow = true;
-    pointLight.shadowDarkness = 0.5;
-    pointLight.shadowCameraVisible = true; // only for debugging
-	scene.add(pointLight);
-	pointLight.position.x = 800;
-	pointLight.position.y = 1700;
-	pointLight.position.z = 800;*/
-
     
 	var pointLight = new THREE.PointLight(0xFFFFFF ,0.9);
     //pointLight.castShadow = true;
@@ -750,8 +741,10 @@ function updateStats(newVal){
         current_height = datasetH.data[x][height_prop];
 	    normalized_color = (((current_color/color_sum)*100)*color_weight*color_polarity);
         normalized_height = (((current_height/height_sum)*100)*height_weight*height_polarity);
-        //console.log("Normalized color indicator: "+normalized_color); 
-        //console.log("Normalized height indicator: "+normalized_height); 
+        if (DEBUG) {
+			console.log("Normalized color indicator: "+normalized_color); 
+	        console.log("Normalized height indicator: "+normalized_height); 
+		}
         datasetH.data[x].rank=parseInt( (normalized_color+normalized_height) *100 );
         //rank_regioni[regione_id] = parseInt((((current_color/color_sum)*100)*color_weight)+(((current_height/height_sum)*100)*height_weight)*100);
 		current_rank = datasetH.data[x].rank;
@@ -805,7 +798,7 @@ function updateShareText() {
     var selStatH = document.getElementById("statchooserH");
     var selStatC = document.getElementById("statchooserC");
 	
-	refURL = encodeURIComponent(location.protocol + '//' + location.host + location.pathname +"?h="+h+"&c="+c+"&hwc="+hwc+"&g="+g);
+	refURL = encodeURIComponent(location.protocol + '//' + location.host + location.pathname +"?l="+l+"&h="+h+"&c="+c+"&hwc="+hwc+"&g="+g);
 	//console.log("refURL: "+refURL);
 	refText = encodeURIComponent( "#ildatotratto "+selStatH.options[selStatH.selectedIndex].text+" & "+selStatC.options[selStatC.selectedIndex].text+" #istat #datachallenge");
 
@@ -817,4 +810,32 @@ function updateShareText() {
  
 	//update facebook
 
+}
+
+function changeLang(newlang){
+	l = newlang;
+	hsel = document.getElementById("statchooserH"); 
+    csel = document.getElementById("statchooserC");
+	for (dsc = 0; dsc < datasets.length; dsc++) {
+		hsel.options[dsc].text = datasets[dsc]['label_'+l]; 
+		csel.options[dsc].text = datasets[dsc]["label_"+l]; 
+	}
+	$('.selectpicker').selectpicker('refresh');
+
+	document.title = labels["lbl_title_"+l];
+	$("#titleselect").text(labels["lbl_titleselect_"+l]);
+	$("#titleslider").text(labels["lbl_titleslider_"+l]);
+	$("#titleshare").text(labels["lbl_titleshare_"+l]);
+	$("#subtitle").html(labels["lbl_head_"+l]);
+	$("#aboutlink").attr("href","about_"+l+".html");
+
+	// legend and slider labels
+	
+	//get the selected High and Color labels
+	$("#stat-dimhigh").html(hsel.options[hsel.selectedIndex].text);
+    $(".label-dim-high").html(hsel.options[hsel.selectedIndex].text);	
+	$("#stat-dimcolor").html(csel.options[csel.selectedIndex].text);
+	$(".label-dim-color").html(csel.options[csel.selectedIndex].text);
+
+	updateShareText();
 }

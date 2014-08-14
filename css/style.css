@@ -542,6 +542,19 @@ header .section_icon .logo{
     margin:15px 0;
 }
 
+/**********************
+    Language Selector
+***********************/
+
+span.filter-option.pull-left span.ita-lang {
+  background:url('../img/ita.png') no-repeat 0 0;
+  padding-left: 30px;
+}
+
+span.filter-option.pull-left span.eng-lang {
+  background:url('../img/eng.png') no-repeat 0 0;
+  padding-left: 30px;
+}
 
 /**********************
    Responsive Layout
