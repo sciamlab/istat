@@ -556,6 +556,18 @@ span.filter-option.pull-left span.eng-lang {
   padding-left: 30px;
 }
 
+footer div.picklang div.dropdown-menu.open {
+  margin: 0 0 -4px 5px;
+  width: 95% !important;
+}
+
+footer div.picklang div.btn-group.bootstrap-select.show-menu-arrow.picklang {
+  width: inherit !important;
+}
+
+footer div.picklang button.btn.dropdown-toggle.selectpicker.btn-default {
+  width: inherit !important;
+}
 /**********************
    Responsive Layout
 ***********************/
