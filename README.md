@@ -12,7 +12,7 @@ WebGL is based on OpenGL and use the onboard accelerated Graphics Processors (GP
 
 WebGL Supported Browsers
 -------------------------
-WebGL is today supported in many browsers, but in case you experience any issues in your device you can refer to the [Compatibility Grid][#3].
+WebGL is today supported in many browsers, including those present in recent smartphones, but in case you experience any issues in your device you can refer to the [Compatibility Grid][#3].
 For further information on WebGL support please check on http://get.webgl.org/
 
 Feature and technology details
